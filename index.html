@@ -13,7 +13,7 @@
             background-color: #f4f4f4;
         }
         header {
-            background-color: #35a79c;
+            background-color: #0073e6;
             color: #ffffff;
             text-align: center;
             padding: 1rem;
@@ -24,7 +24,7 @@
             margin: 0 auto;
         }
         h1, h2 {
-            color: #35a79c;
+            color: #0073e6;
         }
         .cta {
             background-color: #ffffff;
@@ -41,37 +41,75 @@
             padding: 0.5rem;
         }
         button {
-            background-color: #35a79c;
+            background-color: #0073e6;
             color: #ffffff;
             border: none;
             cursor: pointer;
+        }
+        .clocks {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 2rem;
+        }
+        .clock {
+            text-align: center;
+        }
+        .links {
+            margin-top: 2rem;
+        }
+        .links a {
+            display: block;
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Safe Solutions</h1>
+        <h1>Safe Weather Solutions</h1>
     </header>
     <main>
-        <h2>A peak into the future.</h2>
-        <p>At EcoTech Solutions, we're committed to developing innovative technologies that promote sustainability and reduce environmental impact. Our team of experts combines cutting-edge tech with eco-friendly practices to create solutions for a greener future.</p>
-        
-        <h2>Our Services</h2>
-        <ul>
-            <li>Smart energy management systems</li>
-            <li>Waste reduction and recycling technologies</li>
-            <li>Sustainable urban planning solutions</li>
-            <li>Green transportation innovations</li>
-        </ul>
-        
+        <h2>Stay Safe with Real-Time Weather and Fire Updates</h2>
+        <p>Safe Weather Solutions provides real-time updates on weather, air quality, and wildfire conditions to help you stay safe and informed.</p>
+
         <div class="cta">
             <h2>Stay Updated</h2>
-            <p>Join our mailing list to receive the latest news and updates about our eco-friendly innovations.</p>
+            <p>Join our mailing list to receive the latest updates on weather and safety alerts.</p>
             <form action="https://formspree.io/f/your-formspree-endpoint" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit">Subscribe</button>
             </form>
         </div>
+
+        <div class="clocks">
+            <div class="clock" id="los-angeles">Los Angeles: Loading...</div>
+            <div class="clock" id="new-york">New York: Loading...</div>
+            <div class="clock" id="london">London: Loading...</div>
+        </div>
+
+        <h2>California Wildfire Updates</h2>
+        <p>Stay informed about the latest wildfire conditions in California. Check the links below for real-time updates.</p>
+
+        <div class="links">
+            <a href="https://www.fire.ca.gov/incidents/" target="_blank">CAL FIRE Current Incidents</a>
+            <a href="https://www.iqair.com/us/usa/california" target="_blank">California Air Quality Index</a>
+            <a href="https://www.redcross.org/about-us/our-work/disaster-relief/wildfire-relief.html" target="_blank">Donate to Wildfire Relief</a>
+        </div>
     </main>
+
+    <script>
+        function updateClocks() {
+            const timezones = {
+                'los-angeles': 'America/Los_Angeles',
+                'new-york': 'America/New_York',
+                'london': 'Europe/London'
+            };
+            for (const [city, timezone] of Object.entries(timezones)) {
+                const now = new Date().toLocaleString('en-US', { timeZone: timezone });
+                document.getElementById(city).innerText = `${city.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}: ${now}`;
+            }
+        }
+        setInterval(updateClocks, 1000);
+        updateClocks();
+    </script>
 </body>
 </html>
