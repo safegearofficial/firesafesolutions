@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTech Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #35a79c;
+            color: #ffffff;
+            text-align: center;
+            padding: 1rem;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #35a79c;
+        }
+        .cta {
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input, button {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+        }
+        button {
+            background-color: #35a79c;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>EcoTech Solutions</h1>
+    </header>
+    <main>
+        <h2>Revolutionizing Sustainability with Technology</h2>
+        <p>At EcoTech Solutions, we're committed to developing innovative technologies that promote sustainability and reduce environmental impact. Our team of experts combines cutting-edge tech with eco-friendly practices to create solutions for a greener future.</p>
+        
+        <h2>Our Services</h2>
+        <ul>
+            <li>Smart energy management systems</li>
+            <li>Waste reduction and recycling technologies</li>
+            <li>Sustainable urban planning solutions</li>
+            <li>Green transportation innovations</li>
+        </ul>
+        
+        <div class="cta">
+            <h2>Stay Updated</h2>
+            <p>Join our mailing list to receive the latest news and updates about our eco-friendly innovations.</p>
+            <form action="https://formspree.io/f/your-formspree-endpoint" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
