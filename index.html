@@ -31,7 +31,7 @@
         h1, h2 {
             color: #4da6ff;
         }
-        .cta {
+        .cta, .faq {
             background-color: #ffffff;
             border-radius: 5px;
             padding: 1.5rem;
@@ -100,6 +100,25 @@
             border: none;
             margin-top: 2rem;
         }
+        .social-links a {
+            display: inline-block;
+            margin: 0.5rem;
+            padding: 0.5rem 1rem;
+            background-color: #4da6ff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .social-links a:hover {
+            background-color: #0073e6;
+        }
+        details {
+            margin: 1rem 0;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
         body.dark-mode {
             background-color: #121212;
             color: #e6e6e6;
@@ -107,7 +126,7 @@
         body.dark-mode header {
             background-color: #1e1e1e;
         }
-        body.dark-mode .cta {
+        body.dark-mode .cta, body.dark-mode .faq {
             background-color: #1e1e1e;
             color: #e6e6e6;
         }
@@ -126,9 +145,9 @@
         <h2>California Wildfire Updates</h2>
         <p>Stay informed about the latest wildfire conditions in California. Check here for real-time updates and helpful resources.</p>
 
-        <!-- Updated Map Embed -->
+        <!-- Reliable Wildfire Map Embed -->
         <iframe 
-            src="https://inciweb.nwcg.gov/maps/" 
+            src="https://www.arcgis.com/apps/webappviewer/index.html?id=4a8b92c3e9e34c819eeb7d6c4069a9dc" 
             title="Interactive Wildfire Map" 
             aria-label="Interactive map showing wildfire incidents">
         </iframe>
@@ -139,12 +158,40 @@
         </div>
 
         <div class="cta">
+            <h2>Helpful Links</h2>
+            <div class="links">
+                <a href="https://www.fire.ca.gov/incidents/" target="_blank">CAL FIRE Current Incidents</a>
+                <a href="https://www.iqair.com/us/usa/california" target="_blank">California Air Quality Index</a>
+                <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank">Donate to Wildfire Relief</a>
+            </div>
+        </div>
+
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <details>
+                <summary>What should I do in case of a wildfire near my area?</summary>
+                <p>Follow evacuation orders immediately, prepare an emergency kit, and stay informed via trusted sources like CAL FIRE.</p>
+            </details>
+            <details>
+                <summary>How can I help wildfire victims?</summary>
+                <p>Donate to organizations like Red Cross or local fire departments. Avoid unsolicited physical donations unless requested.</p>
+            </details>
+        </div>
+
+        <div class="cta">
             <h2>Stay Updated</h2>
             <p>Join our mailing list to receive the latest updates on wildfire safety and weather alerts.</p>
             <form action="https://formspree.io/f/xovvbpgy" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit">Subscribe</button>
             </form>
+        </div>
+
+        <div class="social-links">
+            <h2>Share This Page</h2>
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
         </div>
     </main>
     <footer>
