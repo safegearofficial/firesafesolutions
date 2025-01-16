@@ -1,0 +1,15 @@
+- name: Parse JSON
+  run: echo ${{ fromJSON(github.event.inputs.json_data) }}
+function safeLoad(path) {
+  try {
+    return require(path);
+  } catch (err) {
+    return {};
+  }
+}
+- name: Debug - Check if JSON file is empty
+  run: |
+    if [ ! -s your_file.json ]; then
+      echo "Error: your_file.json is empty!"
+      exit 1
+    fi
