@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stay informed about California wildfires with Safe Weather Solutions. Real-time updates, helpful resources, and emergency contacts.">
+    <meta name="keywords" content="California wildfires, wildfire updates, air quality, safety tips, donate">
+    <meta name="author" content="Safe Weather Solutions">
     <title>Safe Weather Solutions</title>
     <style>
         body {
@@ -11,6 +14,7 @@
             margin: 0;
             padding: 0;
             background-color: #e6f3ff;
+            color: #333;
         }
         header {
             background-color: #4da6ff;
@@ -89,6 +93,26 @@
             color: #ffffff;
             margin-top: 2rem;
         }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: 0;
+            margin-top: 2rem;
+        }
+        details {
+            margin: 1rem 0;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+        body.dark-mode a {
+            color: #4da6ff;
+        }
     </style>
 </head>
 <body>
@@ -97,36 +121,69 @@
     </header>
     <main>
         <h2>California Wildfire Updates</h2>
-        <p>Stay informed about the latest wildfire conditions in California. Check here for real-time updates and useful resources.</p>
+        <p>Stay informed about the latest wildfire conditions in California. Check here for real-time updates and helpful resources.</p>
+
+        <!-- Interactive Map -->
+        <iframe 
+            src="https://www.fire.ca.gov/incidents/" 
+            title="Live Wildfire Map" 
+            aria-label="Interactive Map showing active wildfires in California">
+        </iframe>
 
         <div class="clocks">
-            <div class="clock" id="los-angeles">Los Angeles: Loading...</div>
-            <div class="clock" id="new-york">New York: Loading...</div>
+            <div class="clock" id="los-angeles" aria-label="Current time in Los Angeles">Los Angeles: Loading...</div>
+            <div class="clock" id="new-york" aria-label="Current time in New York">New York: Loading...</div>
         </div>
 
         <div class="cta">
             <h2>Helpful Resources</h2>
-            <p>Access the most up-to-date information and support for wildfire safety and relief efforts:</p>
             <div class="links">
-                <a href="https://www.fire.ca.gov/incidents/" target="_blank">CAL FIRE Current Incidents</a>
-                <a href="https://www.iqair.com/us/usa/california" target="_blank">California Air Quality Index</a>
-                <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank">Donate to Wildfire Relief</a>
-                <a href="https://readyforwildfire.org/" target="_blank">Wildfire Preparedness Tips</a>
-                <a href="https://www.weather.gov/" target="_blank">National Weather Service</a>
-                <a href="https://earthdata.nasa.gov/" target="_blank">NASA Earth Data</a>
+                <a href="https://www.fire.ca.gov/incidents/" target="_blank" aria-label="CAL FIRE Current Incidents">CAL FIRE Current Incidents</a>
+                <a href="https://www.iqair.com/us/usa/california" target="_blank" aria-label="California Air Quality Index">California Air Quality Index</a>
+                <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank" aria-label="Donate to Wildfire Relief">Donate to Wildfire Relief</a>
+                <a href="https://readyforwildfire.org/" target="_blank" aria-label="Wildfire Preparedness Tips">Wildfire Preparedness Tips</a>
+                <a href="https://www.weather.gov/" target="_blank" aria-label="National Weather Service">National Weather Service</a>
             </div>
-            <p>Join our mailing list to receive the latest updates on weather and safety alerts:</p>
-            <form action="https://formspree.io/f/xovvbpgy" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
         </div>
+
+        <!-- Social Sharing Buttons -->
+        <div style="margin-top: 1.5rem; text-align: center;">
+            <p>Share this page:</p>
+            <a href="https://twitter.com/intent/tweet?url=https://yourwebsite.com&text=Stay%20updated%20on%20California%20wildfires!" target="_blank">Twitter</a> |
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com" target="_blank">Facebook</a> |
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourwebsite.com&title=Wildfire%20Updates" target="_blank">LinkedIn</a>
+        </div>
+
+        <!-- Emergency Contacts -->
+        <section style="margin-top: 2rem;">
+            <h2>Emergency Contacts</h2>
+            <ul>
+                <li><strong>911:</strong> Emergency Services</li>
+                <li><strong>Cal Fire Information Line:</strong> (800) 725-2876</li>
+                <li><strong>Red Cross Emergency Hotline:</strong> (800) 733-2767</li>
+            </ul>
+        </section>
+
+        <!-- FAQ Section -->
+        <section style="margin-top: 2rem;">
+            <h2>FAQs</h2>
+            <details>
+                <summary>What should I do if I'm near a wildfire?</summary>
+                <p>Follow evacuation orders, stay informed, and have an emergency kit ready.</p>
+            </details>
+            <details>
+                <summary>How can I improve my home's fire resistance?</summary>
+                <p>Clear vegetation around your home, install fire-resistant materials, and maintain an emergency water supply.</p>
+            </details>
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 Safe Weather Solutions. All Rights Reserved.</p>
+        <button id="dark-mode-toggle" style="margin-top: 1rem; padding: 0.5rem; background-color: #333; color: #fff; border: none; cursor: pointer; border-radius: 5px;">Toggle Dark Mode</button>
     </footer>
 
     <script>
+        // Update Clocks
         function updateClocks() {
             const timezones = {
                 'los-angeles': 'America/Los_Angeles',
@@ -139,6 +196,11 @@
         }
         setInterval(updateClocks, 1000);
         updateClocks();
+
+        // Dark Mode Toggle
+        document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
     </script>
 </body>
 </html>
