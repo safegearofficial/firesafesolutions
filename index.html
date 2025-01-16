@@ -10,10 +10,10 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #e6f3ff;
         }
         header {
-            background-color: #0073e6;
+            background-color: #4da6ff;
             color: #ffffff;
             text-align: center;
             padding: 1rem;
@@ -24,7 +24,7 @@
             margin: 0 auto;
         }
         h1, h2 {
-            color: #0073e6;
+            color: #4da6ff;
         }
         .cta {
             background-color: #ffffff;
@@ -41,7 +41,7 @@
             padding: 0.5rem;
         }
         button {
-            background-color: #0073e6;
+            background-color: #4da6ff;
             color: #ffffff;
             border: none;
             cursor: pointer;
@@ -54,13 +54,6 @@
         .clock {
             text-align: center;
         }
-        .links {
-            margin-top: 2rem;
-        }
-        .links a {
-            display: block;
-            margin-bottom: 0.5rem;
-        }
     </style>
 </head>
 <body>
@@ -68,31 +61,21 @@
         <h1>Safe Weather Solutions</h1>
     </header>
     <main>
-        <h2>Stay Safe with Real-Time Weather and Fire Updates</h2>
-        <p>Safe Weather Solutions provides real-time updates on weather, air quality, and wildfire conditions to help you stay safe and informed.</p>
-
-        <div class="cta">
-            <h2>Stay Updated</h2>
-            <p>Join our mailing list to receive the latest updates on weather and safety alerts.</p>
-            <form action="https://formspree.io/f/xovvbpgy method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
-            </form>
-        </div>
+        <h2>California Wildfire Updates</h2>
+        <p>Stay informed about the latest wildfire conditions in California. Check here for real-time updates.</p>
 
         <div class="clocks">
             <div class="clock" id="los-angeles">Los Angeles: Loading...</div>
             <div class="clock" id="new-york">New York: Loading...</div>
-            
         </div>
 
-        <h2>California Wildfire Updates</h2>
-        <p>Stay informed about the latest wildfire conditions in California. Check the links below for real-time updates.</p>
-
-        <div class="links">
-            <a href="https://www.fire.ca.gov/incidents/" target="_blank">CAL FIRE Current Incidents</a>
-            <a href="https://www.iqair.com/us/usa/california" target="_blank">California Air Quality Index</a>
-            <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank">Donate to Wildfire Relief</a>
+        <div class="cta">
+            <h2>Stay Updated</h2>
+            <p>Join our mailing list to receive the latest updates on weather and safety alerts.</p>
+            <form action="https://formspree.io/f/xovvbpgy" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
         </div>
     </main>
 
