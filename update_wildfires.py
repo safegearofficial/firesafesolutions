@@ -1,31 +1,29 @@
-import requests
-from bs4 import BeautifulSoup
-import json
+name: Update Wildfire Data
 
-def get_wildfire_data():
-    url = "https://www.fire.ca.gov/incidents/"
-    response = requests.get(url)
-    soup = BeautifulSoup(response.content, 'html.parser')
-    
-    fires = []
-    for row in soup.select('table.incident-list tbody tr'):
-        columns = row.find_all('td')
-        if len(columns) >= 5:
-            name = columns[0].text.strip()
-            acres = columns[2].text.strip().replace(',', '')
-            containment = columns[3].text.strip()
-            fires.append({
-                'Name': name,
-                'Acres': int(acres) if acres.isdigit() else 0,
-                'Containment': containment
-            })
-    
-    return sorted(fires, key=lambda x: x['Acres'], reverse=True)[:5]
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
 
-def generate_json(data):
-    with open('wildfire_data.json', 'w') as f:
-        json.dump(data, f)
+jobs:
+  update-data:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install requests beautifulsoup4
+    - name: Run wildfire data script
+      run: python update_wildfires.py
+    - name: Commit and push if changed
+      run: |
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add wildfire_data.json
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Update wildfire data" && git push)
 
-if __name__ == "__main__":
-    wildfire_data = get_wildfire_data()
-    generate_json(wildfire_data)
