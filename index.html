@@ -235,5 +235,28 @@
             // Process and update
         }
     </script>
+    <script>
+    // Fetch and display wildfire data
+    fetch('wildfire_data.json')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.getElementById('wildfire-data');
+            tableBody.innerHTML = '';
+            data.forEach(fire => {
+                const row = `
+                    <tr>
+                        <td>${fire.Name}</td>
+                        <td>${fire.Acres.toLocaleString()}</td>
+                        <td>${fire.Containment}</td>
+                    </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching wildfire data:', error);
+            document.getElementById('wildfire-data').innerHTML = '<tr><td colspan="3">Error loading data</td></tr>';
+        });
+</script>
 </body>
 </html>
