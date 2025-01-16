@@ -15,6 +15,7 @@
             padding: 0;
             background-color: #e6f3ff;
             color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         header {
             background-color: #4da6ff;
@@ -95,7 +96,7 @@
         }
         iframe {
             width: 100%;
-            height: 400px;
+            height: 500px;
             border: 0;
             margin-top: 2rem;
         }
@@ -108,10 +109,19 @@
         }
         body.dark-mode {
             background-color: #121212;
-            color: #ffffff;
+            color: #e6e6e6;
         }
-        body.dark-mode a {
-            color: #4da6ff;
+        body.dark-mode header {
+            background-color: #1e1e1e;
+        }
+        body.dark-mode .cta {
+            background-color: #1e1e1e;
+            color: #e6e6e6;
+        }
+        body.dark-mode input {
+            background-color: #333;
+            color: #e6e6e6;
+            border: 1px solid #555;
         }
     </style>
 </head>
@@ -123,11 +133,11 @@
         <h2>California Wildfire Updates</h2>
         <p>Stay informed about the latest wildfire conditions in California. Check here for real-time updates and helpful resources.</p>
 
-        <!-- Interactive Map -->
+        <!-- Updated Map Embed -->
         <iframe 
-            src="https://www.fire.ca.gov/incidents/" 
-            title="Live Wildfire Map" 
-            aria-label="Interactive Map showing active wildfires in California">
+            src="https://maps.nwcg.gov/" 
+            title="Interactive Map of Wildfires" 
+            aria-label="Interactive map showing wildfire incidents">
         </iframe>
 
         <div class="clocks">
@@ -136,46 +146,13 @@
         </div>
 
         <div class="cta">
-            <h2>Helpful Resources</h2>
-            <div class="links">
-                <a href="https://www.fire.ca.gov/incidents/" target="_blank" aria-label="CAL FIRE Current Incidents">CAL FIRE Current Incidents</a>
-                <a href="https://www.iqair.com/us/usa/california" target="_blank" aria-label="California Air Quality Index">California Air Quality Index</a>
-                <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank" aria-label="Donate to Wildfire Relief">Donate to Wildfire Relief</a>
-                <a href="https://readyforwildfire.org/" target="_blank" aria-label="Wildfire Preparedness Tips">Wildfire Preparedness Tips</a>
-                <a href="https://www.weather.gov/" target="_blank" aria-label="National Weather Service">National Weather Service</a>
-            </div>
+            <h2>Stay Updated</h2>
+            <p>Join our mailing list to receive the latest updates on wildfire safety and weather alerts.</p>
+            <form action="https://formspree.io/f/xovvbpgy" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
         </div>
-
-        <!-- Social Sharing Buttons -->
-        <div style="margin-top: 1.5rem; text-align: center;">
-            <p>Share this page:</p>
-            <a href="https://twitter.com/intent/tweet?url=https://yourwebsite.com&text=Stay%20updated%20on%20California%20wildfires!" target="_blank">Twitter</a> |
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com" target="_blank">Facebook</a> |
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://yourwebsite.com&title=Wildfire%20Updates" target="_blank">LinkedIn</a>
-        </div>
-
-        <!-- Emergency Contacts -->
-        <section style="margin-top: 2rem;">
-            <h2>Emergency Contacts</h2>
-            <ul>
-                <li><strong>911:</strong> Emergency Services</li>
-                <li><strong>Cal Fire Information Line:</strong> (800) 725-2876</li>
-                <li><strong>Red Cross Emergency Hotline:</strong> (800) 733-2767</li>
-            </ul>
-        </section>
-
-        <!-- FAQ Section -->
-        <section style="margin-top: 2rem;">
-            <h2>FAQs</h2>
-            <details>
-                <summary>What should I do if I'm near a wildfire?</summary>
-                <p>Follow evacuation orders, stay informed, and have an emergency kit ready.</p>
-            </details>
-            <details>
-                <summary>How can I improve my home's fire resistance?</summary>
-                <p>Clear vegetation around your home, install fire-resistant materials, and maintain an emergency water supply.</p>
-            </details>
-        </section>
     </main>
     <footer>
         <p>&copy; 2025 Safe Weather Solutions. All Rights Reserved.</p>
