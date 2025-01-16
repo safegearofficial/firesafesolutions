@@ -3,136 +3,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Stay informed about California wildfires with Safe Weather Solutions. Real-time updates, helpful resources, and emergency contacts.">
-    <meta name="keywords" content="California wildfires, wildfire updates, air quality, safety tips, donate">
+    <meta name="description" content="Stay informed about California wildfires with real-time updates, resources, and safety information.">
+    <meta name="keywords" content="California wildfires, wildfire updates, air quality, emergency preparedness">
     <meta name="author" content="Safe Weather Solutions">
     <title>Safe Weather Solutions</title>
     <style>
+        /* Base Styles */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
             background-color: #e6f3ff;
             color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
         header {
             background-color: #4da6ff;
-            color: #ffffff;
+            color: white;
             text-align: center;
             padding: 1rem;
         }
+
         main {
             padding: 1.5rem;
             max-width: 900px;
             margin: 0 auto;
         }
+
         h1, h2 {
             color: #4da6ff;
         }
-        .cta, .faq {
-            background-color: #ffffff;
+
+        .cta, .faq, .links {
+            background-color: white;
             border-radius: 5px;
             padding: 1.5rem;
             margin-top: 1.5rem;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
+        a {
+            color: #4da6ff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
         .links a {
             display: block;
             margin: 0.5rem 0;
             padding: 0.5rem;
             background-color: #4da6ff;
-            color: #ffffff;
-            text-decoration: none;
+            color: white;
             text-align: center;
             border-radius: 5px;
         }
+
         .links a:hover {
             background-color: #0073e6;
         }
+
         form {
             display: flex;
             flex-direction: column;
         }
+
         input, button {
             margin: 0.5rem 0;
             padding: 0.8rem;
             font-size: 1rem;
             border-radius: 5px;
         }
+
         input {
             border: 1px solid #ccc;
         }
+
         button {
             background-color: #4da6ff;
-            color: #ffffff;
+            color: white;
             border: none;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #0073e6;
         }
+
         .clocks {
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-around;
             margin-top: 2rem;
         }
+
         .clock {
             text-align: center;
             margin: 1rem;
             padding: 1rem;
-            background: #ffffff;
+            background: white;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
         footer {
             text-align: center;
             padding: 1rem;
             background-color: #4da6ff;
-            color: #ffffff;
-            margin-top: 2rem;
+            color: white;
         }
+
         iframe {
             width: 100%;
             height: 600px;
             border: none;
             margin-top: 2rem;
         }
-        .social-links a {
-            display: inline-block;
-            margin: 0.5rem;
-            padding: 0.5rem 1rem;
-            background-color: #4da6ff;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .social-links a:hover {
-            background-color: #0073e6;
-        }
-        details {
-            margin: 1rem 0;
-        }
-        summary {
-            font-weight: bold;
-            cursor: pointer;
-        }
+
+        /* Dark Mode Styles */
         body.dark-mode {
             background-color: #121212;
             color: #e6e6e6;
         }
+
         body.dark-mode header {
             background-color: #1e1e1e;
         }
-        body.dark-mode .cta, body.dark-mode .faq {
+
+        body.dark-mode .cta, body.dark-mode .faq, body.dark-mode .links {
             background-color: #1e1e1e;
             color: #e6e6e6;
         }
+
         body.dark-mode input {
             background-color: #333;
-            color: #e6e6e6;
+            color: white;
             border: 1px solid #555;
         }
     </style>
@@ -143,60 +151,55 @@
     </header>
     <main>
         <h2>California Wildfire Updates</h2>
-        <p>Stay informed about the latest wildfire conditions in California. Check here for real-time updates and helpful resources.</p>
+        <p>Track the latest wildfires across California and stay informed with real-time updates, resources, and emergency information.</p>
 
-        <!-- Reliable Wildfire Map Embed -->
+        <!-- New Wildfire Map Embed -->
         <iframe 
-            src="https://www.arcgis.com/apps/webappviewer/index.html?id=4a8b92c3e9e34c819eeb7d6c4069a9dc" 
-            title="Interactive Wildfire Map" 
-            aria-label="Interactive map showing wildfire incidents">
+            src="https://inciweb.nwcg.gov/accessible-view/" 
+            title="California Wildfire Map" 
+            aria-label="Interactive map showing current wildfires">
         </iframe>
 
         <div class="clocks">
-            <div class="clock" id="los-angeles" aria-label="Current time in Los Angeles">Los Angeles: Loading...</div>
-            <div class="clock" id="new-york" aria-label="Current time in New York">New York: Loading...</div>
+            <div class="clock" id="los-angeles">Los Angeles: Loading...</div>
+            <div class="clock" id="new-york">New York: Loading...</div>
         </div>
 
-        <div class="cta">
-            <h2>Helpful Links</h2>
-            <div class="links">
-                <a href="https://www.fire.ca.gov/incidents/" target="_blank">CAL FIRE Current Incidents</a>
-                <a href="https://www.iqair.com/us/usa/california" target="_blank">California Air Quality Index</a>
-                <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank">Donate to Wildfire Relief</a>
-            </div>
+        <div class="links">
+            <h2>Helpful Resources</h2>
+            <a href="https://www.fire.ca.gov/incidents/" target="_blank">CAL FIRE Current Incidents</a>
+            <a href="https://www.readyforwildfire.org/" target="_blank">Wildfire Preparedness Guide</a>
+            <a href="https://www.iqair.com/us/usa/california" target="_blank">California Air Quality Index</a>
+            <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank">Donate to Wildfire Relief</a>
         </div>
 
         <div class="faq">
             <h2>Frequently Asked Questions</h2>
             <details>
-                <summary>What should I do in case of a wildfire near my area?</summary>
-                <p>Follow evacuation orders immediately, prepare an emergency kit, and stay informed via trusted sources like CAL FIRE.</p>
+                <summary>What should I do during a wildfire evacuation?</summary>
+                <p>Follow evacuation orders immediately. Pack an emergency kit, including important documents, medications, and essentials.</p>
             </details>
             <details>
-                <summary>How can I help wildfire victims?</summary>
-                <p>Donate to organizations like Red Cross or local fire departments. Avoid unsolicited physical donations unless requested.</p>
+                <summary>How can I protect my home from wildfires?</summary>
+                <p>Clear flammable debris, maintain defensible space, and use fire-resistant materials for roofing and siding.</p>
+            </details>
+            <details>
+                <summary>Where can I report a wildfire?</summary>
+                <p>Call 911 or contact your local fire department if you spot a wildfire.</p>
             </details>
         </div>
 
         <div class="cta">
             <h2>Stay Updated</h2>
-            <p>Join our mailing list to receive the latest updates on wildfire safety and weather alerts.</p>
+            <p>Join our mailing list for the latest updates on wildfire safety and emergency alerts.</p>
             <form action="https://formspree.io/f/xovvbpgy" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit">Subscribe</button>
             </form>
         </div>
-
-        <div class="social-links">
-            <h2>Share This Page</h2>
-            <a href="https://facebook.com" target="_blank">Facebook</a>
-            <a href="https://twitter.com" target="_blank">Twitter</a>
-            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-        </div>
     </main>
     <footer>
         <p>&copy; 2025 Safe Weather Solutions. All Rights Reserved.</p>
-        <button id="dark-mode-toggle" style="margin-top: 1rem; padding: 0.5rem; background-color: #333; color: #fff; border: none; cursor: pointer; border-radius: 5px;">Toggle Dark Mode</button>
     </footer>
 
     <script>
@@ -214,10 +217,10 @@
         setInterval(updateClocks, 1000);
         updateClocks();
 
-        // Dark Mode Toggle
-        document.getElementById('dark-mode-toggle').addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-        });
+        // Dark Mode Toggle Based on User Preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark-mode');
+        }
     </script>
 </body>
 </html>
