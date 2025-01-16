@@ -19,8 +19,8 @@
             padding: 1rem;
         }
         main {
-            padding: 2rem;
-            max-width: 800px;
+            padding: 1.5rem;
+            max-width: 900px;
             margin: 0 auto;
         }
         h1, h2 {
@@ -29,8 +29,22 @@
         .cta {
             background-color: #ffffff;
             border-radius: 5px;
-            padding: 2rem;
-            margin-top: 2rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .links a {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            background-color: #4da6ff;
+            color: #ffffff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+        }
+        .links a:hover {
+            background-color: #0073e6;
         }
         form {
             display: flex;
@@ -38,7 +52,12 @@
         }
         input, button {
             margin: 0.5rem 0;
-            padding: 0.5rem;
+            padding: 0.8rem;
+            font-size: 1rem;
+            border-radius: 5px;
+        }
+        input {
+            border: 1px solid #ccc;
         }
         button {
             background-color: #4da6ff;
@@ -46,13 +65,29 @@
             border: none;
             cursor: pointer;
         }
+        button:hover {
+            background-color: #0073e6;
+        }
         .clocks {
             display: flex;
+            flex-wrap: wrap;
             justify-content: space-around;
             margin-top: 2rem;
         }
         .clock {
             text-align: center;
+            margin: 1rem;
+            padding: 1rem;
+            background: #ffffff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #4da6ff;
+            color: #ffffff;
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -62,7 +97,7 @@
     </header>
     <main>
         <h2>California Wildfire Updates</h2>
-        <p>Stay informed about the latest wildfire conditions in California. Check here for real-time updates.</p>
+        <p>Stay informed about the latest wildfire conditions in California. Check here for real-time updates and useful resources.</p>
 
         <div class="clocks">
             <div class="clock" id="los-angeles">Los Angeles: Loading...</div>
@@ -70,24 +105,26 @@
         </div>
 
         <div class="cta">
-            <h2>Stay Updated</h2>
-            <p>Stay informed about the latest wildfire conditions in California. Check the links below for real-time updates.</p>
-
-        <div class="links">
-            
-            <a href="https://www.fire.ca.gov/incidents/" target="_blank">CAL FIRE Current Incidents</a>
-            
-            <a href="https://www.iqair.com/us/usa/california" target="_blank">California Air Quality Index</a>
-            
-            <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank">Donate to Wildfire Relief</a>
-            
-            <p>Join our mailing list to receive the latest updates on weather and safety alerts.</p>
+            <h2>Helpful Resources</h2>
+            <p>Access the most up-to-date information and support for wildfire safety and relief efforts:</p>
+            <div class="links">
+                <a href="https://www.fire.ca.gov/incidents/" target="_blank">CAL FIRE Current Incidents</a>
+                <a href="https://www.iqair.com/us/usa/california" target="_blank">California Air Quality Index</a>
+                <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank">Donate to Wildfire Relief</a>
+                <a href="https://readyforwildfire.org/" target="_blank">Wildfire Preparedness Tips</a>
+                <a href="https://www.weather.gov/" target="_blank">National Weather Service</a>
+                <a href="https://earthdata.nasa.gov/" target="_blank">NASA Earth Data</a>
+            </div>
+            <p>Join our mailing list to receive the latest updates on weather and safety alerts:</p>
             <form action="https://formspree.io/f/xovvbpgy" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit">Subscribe</button>
             </form>
         </div>
     </main>
+    <footer>
+        <p>&copy; 2025 Safe Weather Solutions. All Rights Reserved.</p>
+    </footer>
 
     <script>
         function updateClocks() {
