@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-import pandas as pd
+import json
 
 def get_wildfire_data():
     url = "https://www.fire.ca.gov/incidents/"
@@ -12,45 +12,20 @@ def get_wildfire_data():
         columns = row.find_all('td')
         if len(columns) >= 5:
             name = columns[0].text.strip()
-            county = columns[1].text.strip()
             acres = columns[2].text.strip().replace(',', '')
             containment = columns[3].text.strip()
             fires.append({
                 'Name': name,
-                'County': county,
                 'Acres': int(acres) if acres.isdigit() else 0,
                 'Containment': containment
             })
     
-    return pd.DataFrame(fires)
+    return sorted(fires, key=lambda x: x['Acres'], reverse=True)[:5]
 
-def generate_html(df):
-    html_content = """
-    <h2>Largest Active Wildfires in California</h2>
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>County</th>
-        <th>Acres</th>
-        <th>Containment</th>
-      </tr>
-    """
-    
-    for _, row in df.nlargest(5, 'Acres').iterrows():
-        html_content += f"""
-        <tr>
-          <td>{row['Name']}</td>
-          <td>{row['County']}</td>
-          <td>{row['Acres']:,}</td>
-          <td>{row['Containment']}</td>
-        </tr>
-        """
-    
-    html_content += "</table>"
-    
-    with open('wildfires.html', 'w') as f:
-        f.write(html_content)
+def generate_json(data):
+    with open('wildfire_data.json', 'w') as f:
+        json.dump(data, f)
 
 if __name__ == "__main__":
     wildfire_data = get_wildfire_data()
-    generate_html(wildfire_data)
+    generate_json(wildfire_data)
