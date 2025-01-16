@@ -74,7 +74,7 @@
         <div class="cta">
             <h2>Stay Updated</h2>
             <p>Join our mailing list to receive the latest updates on weather and safety alerts.</p>
-            <form action: https://formspree.io/f/xovvbpgy method="POST">
+            <form action="https://formspree.io/f/xovvbpgy method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
                 <button type="submit">Subscribe</button>
             </form>
@@ -83,8 +83,6 @@
         <div class="clocks">
             <div class="clock" id="los-angeles">Los Angeles: Loading...</div>
             <div class="clock" id="new-york">New York: Loading...</div>
-            <div class="clock" id="cairo">Cairo: Loading...</div>
-            <div class="clock" id="nablus">Nablus: Loading...</div>
             
         </div>
 
@@ -103,8 +101,6 @@
             const timezones = {
                 'los-angeles': 'America/Los_Angeles',
                 'new-york': 'America/New_York',
-                'cairo': 'Africa/Egypt'
-                'nablus': 'Asia/Palestine'
             };
             for (const [city, timezone] of Object.entries(timezones)) {
                 const now = new Date().toLocaleString('en-US', { timeZone: timezone });
