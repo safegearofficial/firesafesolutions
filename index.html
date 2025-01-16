@@ -6,174 +6,20 @@
     <meta name="description" content="Stay informed about California wildfires with real-time updates, resources, and safety information.">
     <meta name="keywords" content="California wildfires, wildfire updates, air quality, emergency preparedness">
     <meta name="author" content="Safe Weather Solutions">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Safe Weather Solutions">
+    <meta property="og:description" content="Real-time California wildfire updates and safety resources.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsiteurl.com">
+    <meta property="og:image" content="https://yourwebsiteurl.com/thumbnail.jpg">
     <title>Safe Weather Solutions</title>
-    <style>
-        /* Base Styles */
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            background-color: #e6f3ff;
-            color: #333;
-        }
-
-        header {
-            background-color: #4da6ff;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        main {
-            padding: 1.5rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        h1, h2 {
-            color: #3EB489; /* Mint Green */
-        }
-
-        .cta, .faq, .links, .wildfire-list {
-            background-color: white;
-            border-radius: 5px;
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        a {
-            color: #3EB489; /* Mint Green */
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .links a {
-            display: block;
-            margin: 0.5rem 0;
-            padding: 0.5rem;
-            background-color: #3EB489; /* Mint Green */
-            color: white;
-            text-align: center;
-            border-radius: 5px;
-        }
-
-        .links a:hover {
-            background-color: #2C9A6A; /* Darker Mint */
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        input, button {
-            margin: 0.5rem 0;
-            padding: 0.8rem;
-            font-size: 1rem;
-            border-radius: 5px;
-        }
-
-        input {
-            border: 1px solid #ccc;
-        }
-
-        button {
-            background-color: #3EB489;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #2C9A6A;
-        }
-
-        .clocks {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 2rem;
-        }
-
-        .clock {
-            text-align: center;
-            margin: 1rem;
-            padding: 1rem;
-            background: #f9f9f9;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            color: #333;
-        }
-
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #4da6ff;
-            color: white;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1.5rem;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #3EB489;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        /* Dark Mode Styles */
-        body.dark-mode {
-            background-color: #121212;
-            color: #e6e6e6;
-        }
-
-        body.dark-mode header {
-            background-color: #1e1e1e;
-        }
-
-        body.dark-mode .cta, body.dark-mode .faq, body.dark-mode .links, body.dark-mode .wildfire-list {
-            background-color: #1e1e1e;
-            color: #e6e6e6;
-        }
-
-        body.dark-mode input {
-            background-color: #333;
-            color: white;
-            border: 1px solid #555;
-        }
-
-        body.dark-mode .clock {
-            background: #333;
-            color: #e6e6e6;
-        }
-
-        body.dark-mode th {
-            background-color: #2C9A6A;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Safe Weather Solutions</h1>
+    <header role="banner">
+        <h1 id="site-title">Safe Weather Solutions</h1>
     </header>
-    <main>
+    <main role="main" aria-labelledby="site-title">
         <h2>California Wildfire Updates</h2>
         <p>Track the largest active wildfires in California with detailed information about acres burned and containment levels.</p>
 
@@ -189,8 +35,8 @@
                     </tr>
                 </thead>
                 <tbody id="wildfire-data">
-    <!-- Data will be populated by JavaScript -->
-</tbody>
+                    <tr><td colspan="3">Loading...</td></tr>
+                </tbody>
             </table>
         </div>
 
@@ -209,54 +55,11 @@
             <a href="https://supportlafd.kindful.com/?campaign=1040812" target="_blank">Donate to Wildfire Relief</a>
             <a href="https://www.nifc.gov/fire-information" target="_blank">National Fire Information</a>
         </div>
+        <button id="dark-mode-toggle">Toggle Dark Mode</button>
     </main>
-    <footer>
+    <footer role="contentinfo">
         <p>&copy; 2025 Safe Weather Solutions. All Rights Reserved.</p>
     </footer>
-
-    <script>
-        // Update Clocks
-        function updateClocks() {
-            const timezones = {
-                'los-angeles': 'America/Los_Angeles',
-                'new-york': 'America/New_York',
-            };
-            for (const [city, timezone] of Object.entries(timezones)) {
-                const now = new Date().toLocaleString('en-US', { timeZone: timezone });
-                document.getElementById(city).innerText = `${city.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}: ${now}`;
-            }
-        }
-        setInterval(updateClocks, 1000);
-        updateClocks();
-
-        // Fetch Active Wildfires Data
-        async function fetchWildfireData() {
-            const response = await fetch("https://www.fire.ca.gov/incidents/");
-            // Process and update
-        }
-    </script>
-    <script>
-    // Fetch and display wildfire data
-    fetch('wildfire_data.json')
-        .then(response => response.json())
-        .then(data => {
-            const tableBody = document.getElementById('wildfire-data');
-            tableBody.innerHTML = '';
-            data.forEach(fire => {
-                const row = `
-                    <tr>
-                        <td>${fire.Name}</td>
-                        <td>${fire.Acres.toLocaleString()}</td>
-                        <td>${fire.Containment}</td>
-                    </tr>
-                `;
-                tableBody.innerHTML += row;
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching wildfire data:', error);
-            document.getElementById('wildfire-data').innerHTML = '<tr><td colspan="3">Error loading data</td></tr>';
-        });
-</script>
+    <script src="script.js" defer></script>
 </body>
 </html>
