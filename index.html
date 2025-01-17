@@ -125,7 +125,7 @@
     <!-- JavaScript -->
     <script>
         // API URL for live wildfire data
-        const apiUrl = 'https://incidents.fire.ca.gov/umbraco/api/IncidentApi/List';
+        const apiUrl = 'https://cors-anywhere.herokuapp.com/https://incidents.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=true';
 
         // Fetch and display wildfire data
         async function fetchWildfireData() {
