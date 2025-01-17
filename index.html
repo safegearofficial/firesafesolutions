@@ -7,31 +7,49 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f8f9fa;
             color: #333;
         }
         header {
-            background: #333;
+            background: #007BFF;
             color: #fff;
-            padding: 10px 20px;
+            padding: 20px;
             text-align: center;
+        }
+        nav {
+            background: #0056b3;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        section {
+            padding: 20px;
         }
         table {
             width: 100%;
-            margin: 20px auto;
             border-collapse: collapse;
-            text-align: left;
+            margin: 20px 0;
         }
         th, td {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #ddd;
         }
         th {
-            background: #555;
+            background: #333;
             color: #fff;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
         }
         .loading {
             text-align: center;
@@ -40,12 +58,23 @@
     </style>
 </head>
 <body>
+    <!-- Header Section -->
     <header>
         <h1>Safe Weather Solutions</h1>
-        <p>Live Updates on California Wildfires</p>
+        <p>Your trusted source for wildfire updates and preparedness tips.</p>
     </header>
 
-    <div id="content">
+    <!-- Navigation Bar -->
+    <nav>
+        <a href="#wildfires">Wildfire Updates</a>
+        <a href="#faq">FAQ</a>
+        <a href="#tips">Preparedness Tips</a>
+        <a href="#time">Time Zones</a>
+    </nav>
+
+    <!-- Wildfire Updates Section -->
+    <section id="wildfires">
+        <h2>Current Active Wildfires in California</h2>
         <div id="loading" class="loading">Loading wildfire data...</div>
         <table id="wildfire-table" style="display:none;">
             <thead>
@@ -57,49 +86,92 @@
                     <th>Last Updated</th>
                 </tr>
             </thead>
-            <tbody id="wildfire-data">
-            </tbody>
+            <tbody id="wildfire-data"></tbody>
         </table>
-    </div>
+    </section>
 
+    <!-- FAQ Section -->
+    <section id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <h3>What should I do if I receive an evacuation order?</h3>
+        <p>Evacuate immediately and follow the designated routes. Delaying can increase your risk.</p>
+        <h3>How can I protect my home from wildfires?</h3>
+        <p>Maintain defensible space by clearing vegetation, and use fire-resistant building materials.</p>
+    </section>
+
+    <!-- Preparedness Tips Section -->
+    <section id="tips">
+        <h2>Wildfire Preparedness Tips</h2>
+        <ul>
+            <li>Assemble an emergency kit with essentials like food, water, and medications.</li>
+            <li>Sign up for local alert systems to stay informed.</li>
+            <li>Create a wildfire action plan for your family.</li>
+        </ul>
+    </section>
+
+    <!-- Time Zones Section -->
+    <section id="time">
+        <h2>Current Time in Major U.S. Cities</h2>
+        <p><strong>Los Angeles (PST):</strong> <span id="time-la"></span></p>
+        <p><strong>Chicago (CST):</strong> <span id="time-chi"></span></p>
+        <p><strong>New York (EST):</strong> <span id="time-ny"></span></p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Safe Weather Solutions. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
     <script>
+        // API URL for live wildfire data
         const apiUrl = 'https://incidents.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=true';
 
-        // Function to fetch and display wildfire data
+        // Fetch and display wildfire data
         async function fetchWildfireData() {
             try {
                 const response = await fetch(apiUrl);
                 const data = await response.json();
 
-                // Clear old table rows
                 const tableBody = document.getElementById('wildfire-data');
-                tableBody.innerHTML = '';
+                tableBody.innerHTML = ''; // Clear old rows
 
-                // Populate table with new data
                 data.forEach(fire => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
-                        <td>${fire.fireName}</td>
-                        <td>${fire.county}</td>
-                        <td>${fire.acresBurned}</td>
-                        <td>${fire.containment}%</td>
-                        <td>${new Date(fire.lastUpdated).toLocaleString()}</td>
+                        <td>${fire.Name || 'N/A'}</td>
+                        <td>${fire.Counties || 'N/A'}</td>
+                        <td>${fire.AcresBurned || '0'} acres</td>
+                        <td>${fire.PercentContained || '0'}%</td>
+                        <td>${fire.LastUpdated ? new Date(fire.LastUpdated).toLocaleString() : 'N/A'}</td>
                     `;
                     tableBody.appendChild(row);
                 });
 
-                // Show table and hide loading message
                 document.getElementById('wildfire-table').style.display = 'table';
                 document.getElementById('loading').style.display = 'none';
             } catch (error) {
                 console.error('Error fetching wildfire data:', error);
-                document.getElementById('loading').textContent = 'Failed to load data. Please try again later.';
+                document.getElementById('loading').textContent = 'Failed to load wildfire data. Please try again later.';
             }
         }
 
-        // Fetch data immediately and set interval for live updates
+        // Update time zones
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('time-la').textContent = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
+            document.getElementById('time-chi').textContent = now.toLocaleString('en-US', { timeZone: 'America/Chicago' });
+            document.getElementById('time-ny').textContent = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+        }
+
+        // Initial data load
         fetchWildfireData();
-        setInterval(fetchWildfireData, 600000); // Refresh every 10 minutes
+        updateTime();
+
+        // Set intervals for updates
+        setInterval(fetchWildfireData, 600000); // Update wildfire data every 10 minutes
+        setInterval(updateTime, 1000); // Update time every second
     </script>
 </body>
 </html>
+
