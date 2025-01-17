@@ -126,7 +126,7 @@
     <script>
         // API URL for live wildfire data
         const apiUrl = 'https://incidents.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=true';
-        const useCorsProxy = false; // Set to true if CORS issues occur
+        const useCorsProxy = true; // Set to true if CORS issues occur
 
         const fetchUrl = useCorsProxy
             ? `https://cors-anywhere.herokuapp.com/${apiUrl}`
