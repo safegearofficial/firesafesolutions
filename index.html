@@ -126,7 +126,13 @@
     <script>
         // API URL for live wildfire data
         const apiUrl = 'https://cors-anywhere.herokuapp.com/https://incidents.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=true';
-
+const response = await fetch(apiUrl, {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
+});
         // Fetch and display wildfire data
         async function fetchWildfireData() {
             try {
