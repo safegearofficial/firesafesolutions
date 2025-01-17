@@ -3,168 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Informational site about wildfires, safety tips, and live updates for Safe Weather Solutions">
     <title>Safe Weather Solutions</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            line-height: 1.6;
             margin: 0;
             padding: 0;
-            line-height: 1.6;
-            background-color: #f4f4f9;
+            background-color: #f4f4f4;
             color: #333;
         }
-
         header {
-            background: #444;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-
-        nav {
             background: #333;
             color: #fff;
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 0.5rem 0;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-        }
-
-        main {
-            padding: 1rem;
-            max-width: 800px;
-            margin: auto;
-        }
-
-        section {
-            margin-bottom: 2rem;
-        }
-
-        footer {
-            background: #444;
-            color: #fff;
+            padding: 10px 20px;
             text-align: center;
-            padding: 1rem 0;
-            margin-top: 2rem;
         }
-
-        .time-container {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
+        table {
+            width: 100%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            text-align: left;
         }
-
-        .time {
-            flex: 1;
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        th {
+            background: #555;
+            color: #fff;
+        }
+        .loading {
             text-align: center;
-            background: #ddd;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-
-        .faq-item {
-            margin-bottom: 1rem;
-        }
-
-        .faq-item h3 {
-            margin: 0.5rem 0;
-        }
-
-        .faq-item p {
-            margin: 0;
+            padding: 20px;
         }
     </style>
-    <script>
-        function updateTime() {
-            const laTime = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles", timeStyle: "medium", hourCycle: "h12" });
-            const chicagoTime = new Date().toLocaleString("en-US", { timeZone: "America/Chicago", timeStyle: "medium", hourCycle: "h12" });
-            const nyTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York", timeStyle: "medium", hourCycle: "h12" });
-            
-            document.getElementById("la-time").textContent = laTime;
-            document.getElementById("chicago-time").textContent = chicagoTime;
-            document.getElementById("ny-time").textContent = nyTime;
-        }
-
-        setInterval(updateTime, 1000);
-    </script>
 </head>
 <body>
     <header>
         <h1>Safe Weather Solutions</h1>
-        <p>Your source for wildfire updates and safety tips.</p>
+        <p>Live Updates on California Wildfires</p>
     </header>
 
-    <nav>
-        <a href="#wildfires">Active Wildfires</a>
-        <a href="#faq">FAQ</a>
-        <a href="#tips">Safety Tips</a>
-    </nav>
+    <div id="content">
+        <div id="loading" class="loading">Loading wildfire data...</div>
+        <table id="wildfire-table" style="display:none;">
+            <thead>
+                <tr>
+                    <th>Fire Name</th>
+                    <th>County</th>
+                    <th>Acres Burned</th>
+                    <th>Containment</th>
+                    <th>Last Updated</th>
+                </tr>
+            </thead>
+            <tbody id="wildfire-data">
+            </tbody>
+        </table>
+    </div>
 
-    <main>
-        <section id="wildfires">
-            <h2>Largest Wildfires in California</h2>
-            <p>Stay informed about the largest active wildfires in California. Here is the latest information:</p>
-            <ul>
-                <li><strong>Fire Name:</strong> Valley Fire - <strong>Location:</strong> Northern California - <strong>Acres Burned:</strong> 50,000 - <strong>Status:</strong> 75% Contained</li>
-                <li><strong>Fire Name:</strong> Sierra Fire - <strong>Location:</strong> Sierra Foothills - <strong>Acres Burned:</strong> 25,000 - <strong>Status:</strong> 60% Contained</li>
-                <li><strong>Fire Name:</strong> Coastal Blaze - <strong>Location:</strong> Central Coast - <strong>Acres Burned:</strong> 30,000 - <strong>Status:</strong> 40% Contained</li>
-            </ul>
-        </section>
+    <script>
+        const apiUrl = 'https://incidents.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=true';
 
-        <section id="time">
-            <h2>Current Time</h2>
-            <div class="time-container">
-                <div class="time">
-                    <h3>Los Angeles</h3>
-                    <p id="la-time">Loading...</p>
-                </div>
-                <div class="time">
-                    <h3>Chicago</h3>
-                    <p id="chicago-time">Loading...</p>
-                </div>
-                <div class="time">
-                    <h3>New York</h3>
-                    <p id="ny-time">Loading...</p>
-                </div>
-            </div>
-        </section>
+        // Function to fetch and display wildfire data
+        async function fetchWildfireData() {
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
 
-        <section id="faq">
-            <h2>FAQ</h2>
-            <div class="faq-item">
-                <h3>What should I do if a wildfire is approaching?</h3>
-                <p>Evacuate immediately if ordered by local authorities. Prepare an emergency kit and follow a planned evacuation route.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How can I stay updated?</h3>
-                <p>Use apps and websites like Cal Fire, local news stations, or emergency alerts to get live updates.</p>
-            </div>
-            <div class="faq-item">
-                <h3>Can I help firefighters?</h3>
-                <p>Yes, consider donating to firefighter relief funds or volunteering at community support organizations.</p>
-            </div>
-        </section>
+                // Clear old table rows
+                const tableBody = document.getElementById('wildfire-data');
+                tableBody.innerHTML = '';
 
-        <section id="tips">
-            <h2>Preparation Tips</h2>
-            <ul>
-                <li>Create an emergency kit with essentials like water, food, and first-aid supplies.</li>
-                <li>Have an evacuation plan and practice it with your family.</li>
-                <li>Maintain a defensible space around your property by clearing flammable debris.</li>
-                <li>Keep important documents in a fireproof safe or digitally backed up.</li>
-                <li>Stay informed via official channels and be ready to leave when instructed.</li>
-            </ul>
-        </section>
-    </main>
+                // Populate table with new data
+                data.forEach(fire => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${fire.fireName}</td>
+                        <td>${fire.county}</td>
+                        <td>${fire.acresBurned}</td>
+                        <td>${fire.containment}%</td>
+                        <td>${new Date(fire.lastUpdated).toLocaleString()}</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
 
-    <footer>
-        <p>&copy; 2025 Safe Weather Solutions. Stay safe and informed.</p>
-    </footer>
+                // Show table and hide loading message
+                document.getElementById('wildfire-table').style.display = 'table';
+                document.getElementById('loading').style.display = 'none';
+            } catch (error) {
+                console.error('Error fetching wildfire data:', error);
+                document.getElementById('loading').textContent = 'Failed to load data. Please try again later.';
+            }
+        }
+
+        // Fetch data immediately and set interval for live updates
+        fetchWildfireData();
+        setInterval(fetchWildfireData, 600000); // Refresh every 10 minutes
+    </script>
 </body>
 </html>
