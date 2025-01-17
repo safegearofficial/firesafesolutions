@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Stay updated on the latest California wildfire information including locations, containment, and safety tips.">
+    <meta name="description" content="Stay updated on the latest California wildfire information, including locations, containment, and safety tips.">
     <title>California Wildfire Updates</title>
     <style>
         :root {
@@ -13,6 +13,7 @@
             --nav-bg-color: #333;
             --nav-hover-bg-color: #575757;
             --footer-bg-color: #333;
+            --section-bg-color: #fff;
         }
         [data-theme="dark"] {
             --bg-color: #1a1a1a;
@@ -21,6 +22,7 @@
             --nav-bg-color: #1a1a1a;
             --nav-hover-bg-color: #444;
             --footer-bg-color: #1a1a1a;
+            --section-bg-color: #2a2a2a;
         }
         body {
             font-family: Arial, sans-serif;
@@ -28,6 +30,7 @@
             padding: 0;
             background-color: var(--bg-color);
             color: var(--text-color);
+            line-height: 1.6;
         }
         header {
             background-color: var(--header-bg-color);
@@ -37,25 +40,27 @@
         }
         nav {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             background: var(--nav-bg-color);
         }
         nav a {
             color: white;
-            padding: 14px 20px;
+            padding: 10px;
             text-decoration: none;
             text-align: center;
+            flex: 1 1 auto;
         }
         nav a:hover {
             background-color: var(--nav-hover-bg-color);
         }
         main {
-            padding: 20px;
+            padding: 10px;
         }
         .section {
             margin-bottom: 20px;
             padding: 15px;
-            background: white;
+            background: var(--section-bg-color);
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -70,8 +75,9 @@
         }
         .time-display {
             display: flex;
-            justify-content: center;
-            gap: 20px;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
             margin: 20px 0;
         }
         .time {
@@ -83,6 +89,11 @@
         }
         .toggle-container input {
             margin-left: 10px;
+        }
+        @media (min-width: 600px) {
+            .time-display {
+                flex-direction: row;
+            }
         }
     </style>
 </head>
@@ -96,6 +107,7 @@
         <a href="#active">Active Wildfires</a>
         <a href="#safety">Safety Tips</a>
         <a href="#resources">Emergency Resources</a>
+        <a href="#map">Wildfire Map</a>
     </nav>
 
     <div class="time-display">
@@ -112,14 +124,7 @@
     <main>
         <section id="active" class="section">
             <h2>Active Wildfires</h2>
-            <p>Here are the latest details on active wildfires in California:</p>
-            <ul>
-                <li><strong>Fire Name:</strong> Smith Fire</li>
-                <li><strong>Location:</strong> Northern California</li>
-                <li><strong>Size:</strong> 15,000 acres</li>
-                <li><strong>Containment:</strong> 45%</li>
-            </ul>
-            <p><em>Last updated: January 15, 2025</em></p>
+            <ul id="wildfire-list">Loading...</ul>
         </section>
 
         <section id="safety" class="section">
@@ -142,6 +147,11 @@
                 <li><a href="https://www.fema.gov" target="_blank">FEMA</a></li>
             </ul>
         </section>
+
+        <section id="map" class="section">
+            <h2>California Wildfire Map</h2>
+            <iframe src="https://www.fire.ca.gov/incidents/" width="100%" height="600" style="border:none;"></iframe>
+        </section>
     </main>
 
     <footer>
@@ -152,31 +162,13 @@
     <script>
         function updateTime() {
             const now = new Date();
-            const options = { timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit" };
-            document.getElementById("time-la").textContent = `Los Angeles: ${new Intl.DateTimeFormat("en-US", options).format(now)}`;
+            const options = { hour: '2-digit', minute: '2-digit' };
 
-            options.timeZone = "America/New_York";
-            document.getElementById("time-ny").textContent = `New York: ${new Intl.DateTimeFormat("en-US", options).format(now)}`;
+            const laTime = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'America/Los_Angeles' }).format(now);
+            document.getElementById('time-la').textContent = `Los Angeles: ${laTime}`;
 
-            options.timeZone = "America/Chicago";
-            document.getElementById("time-ch").textContent = `Chicago: ${new Intl.DateTimeFormat("en-US", options).format(now)}`;
-        }
+            const nyTime = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'America/New_York' }).format(now);
+            document.getElementById('time-ny').textContent = `New York: ${nyTime}`;
 
-        function toggleTheme() {
-            const isDark = document.getElementById("theme-toggle").checked;
-            document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
-        }
-
-        function loadThemePreference() {
-            const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-            document.documentElement.setAttribute("data-theme", prefersDarkScheme ? "dark" : "light");
-            document.getElementById("theme-toggle").checked = prefersDarkScheme;
-        }
-
-        document.getElementById("theme-toggle").addEventListener("change", toggleTheme);
-
-        setInterval(updateTime, 1000);
-        loadThemePreference();
-    </script>
-</body>
-</html>
+            const chTime = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'America/Chicago' }).format(now);
+            
