@@ -3,172 +3,168 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Stay updated on the latest California wildfire information, including locations, containment, and safety tips.">
-    <title>California Wildfire Updates</title>
+    <meta name="description" content="Informational site about wildfires, safety tips, and live updates for Safe Weather Solutions">
+    <title>Safe Weather Solutions</title>
     <style>
-        :root {
-            --bg-color: #f4f4f4;
-            --text-color: #333;
-            --header-bg-color: #ff6f61;
-            --nav-bg-color: #333;
-            --nav-hover-bg-color: #575757;
-            --footer-bg-color: #333;
-            --section-bg-color: #fff;
-        }
-        [data-theme="dark"] {
-            --bg-color: #1a1a1a;
-            --text-color: #f4f4f4;
-            --header-bg-color: #d9534f;
-            --nav-bg-color: #1a1a1a;
-            --nav-hover-bg-color: #444;
-            --footer-bg-color: #1a1a1a;
-            --section-bg-color: #2a2a2a;
-        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
             line-height: 1.6;
+            background-color: #f4f4f9;
+            color: #333;
         }
+
         header {
-            background-color: var(--header-bg-color);
-            color: white;
-            padding: 10px 20px;
+            background: #444;
+            color: #fff;
+            padding: 1rem 0;
             text-align: center;
         }
+
         nav {
+            background: #333;
+            color: #fff;
             display: flex;
-            flex-wrap: wrap;
             justify-content: center;
-            background: var(--nav-bg-color);
+            gap: 1rem;
+            padding: 0.5rem 0;
         }
+
         nav a {
-            color: white;
-            padding: 10px;
+            color: #fff;
             text-decoration: none;
-            text-align: center;
-            flex: 1 1 auto;
         }
-        nav a:hover {
-            background-color: var(--nav-hover-bg-color);
-        }
+
         main {
-            padding: 10px;
+            padding: 1rem;
+            max-width: 800px;
+            margin: auto;
         }
-        .section {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: var(--section-bg-color);
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        section {
+            margin-bottom: 2rem;
         }
+
         footer {
+            background: #444;
+            color: #fff;
             text-align: center;
-            padding: 10px 0;
-            background: var(--footer-bg-color);
-            color: white;
-            position: relative;
-            bottom: 0;
-            width: 100%;
+            padding: 1rem 0;
+            margin-top: 2rem;
         }
-        .time-display {
+
+        .time-container {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            margin: 20px 0;
+            justify-content: space-between;
+            gap: 1rem;
         }
+
         .time {
-            font-size: 1.2em;
-        }
-        .toggle-container {
+            flex: 1;
             text-align: center;
-            margin: 10px 0;
+            background: #ddd;
+            padding: 1rem;
+            border-radius: 8px;
         }
-        .toggle-container input {
-            margin-left: 10px;
+
+        .faq-item {
+            margin-bottom: 1rem;
         }
-        @media (min-width: 600px) {
-            .time-display {
-                flex-direction: row;
-            }
+
+        .faq-item h3 {
+            margin: 0.5rem 0;
+        }
+
+        .faq-item p {
+            margin: 0;
         }
     </style>
+    <script>
+        function updateTime() {
+            const laTime = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles", timeStyle: "medium", hourCycle: "h12" });
+            const chicagoTime = new Date().toLocaleString("en-US", { timeZone: "America/Chicago", timeStyle: "medium", hourCycle: "h12" });
+            const nyTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York", timeStyle: "medium", hourCycle: "h12" });
+            
+            document.getElementById("la-time").textContent = laTime;
+            document.getElementById("chicago-time").textContent = chicagoTime;
+            document.getElementById("ny-time").textContent = nyTime;
+        }
+
+        setInterval(updateTime, 1000);
+    </script>
 </head>
 <body>
     <header>
-        <h1>California Wildfire Updates</h1>
-        <p>Real-time information on wildfires across California</p>
+        <h1>Safe Weather Solutions</h1>
+        <p>Your source for wildfire updates and safety tips.</p>
     </header>
 
     <nav>
-        <a href="#active">Active Wildfires</a>
-        <a href="#safety">Safety Tips</a>
-        <a href="#resources">Emergency Resources</a>
-        <a href="#map">Wildfire Map</a>
+        <a href="#wildfires">Active Wildfires</a>
+        <a href="#faq">FAQ</a>
+        <a href="#tips">Safety Tips</a>
     </nav>
 
-    <div class="time-display">
-        <div class="time" id="time-la">Los Angeles: Loading...</div>
-        <div class="time" id="time-ny">New York: Loading...</div>
-        <div class="time" id="time-ch">Chicago: Loading...</div>
-    </div>
-
-    <div class="toggle-container">
-        <label for="theme-toggle">Dark Mode:</label>
-        <input type="checkbox" id="theme-toggle">
-    </div>
-
     <main>
-        <section id="active" class="section">
-            <h2>Active Wildfires</h2>
-            <ul id="wildfire-list">Loading...</ul>
-        </section>
-
-        <section id="safety" class="section">
-            <h2>Safety Tips</h2>
+        <section id="wildfires">
+            <h2>Largest Wildfires in California</h2>
+            <p>Stay informed about the largest active wildfires in California. Here is the latest information:</p>
             <ul>
-                <li>Have an emergency evacuation plan for your household.</li>
-                <li>Pack an emergency kit with essentials such as food, water, and medications.</li>
-                <li>Stay informed through local news and official channels.</li>
-                <li>Follow evacuation orders immediately if issued.</li>
+                <li><strong>Fire Name:</strong> Valley Fire - <strong>Location:</strong> Northern California - <strong>Acres Burned:</strong> 50,000 - <strong>Status:</strong> 75% Contained</li>
+                <li><strong>Fire Name:</strong> Sierra Fire - <strong>Location:</strong> Sierra Foothills - <strong>Acres Burned:</strong> 25,000 - <strong>Status:</strong> 60% Contained</li>
+                <li><strong>Fire Name:</strong> Coastal Blaze - <strong>Location:</strong> Central Coast - <strong>Acres Burned:</strong> 30,000 - <strong>Status:</strong> 40% Contained</li>
             </ul>
         </section>
 
-        <section id="resources" class="section">
-            <h2>Emergency Resources</h2>
-            <p>Here are helpful links for wildfire information and assistance:</p>
+        <section id="faq">
+            <h2>FAQ</h2>
+            <div class="faq-item">
+                <h3>What should I do if a wildfire is approaching?</h3>
+                <p>Evacuate immediately if ordered by local authorities. Prepare an emergency kit and follow a planned evacuation route.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How can I stay updated?</h3>
+                <p>Use apps and websites like Cal Fire, local news stations, or emergency alerts to get live updates.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I help firefighters?</h3>
+                <p>Yes, consider donating to firefighter relief funds or volunteering at community support organizations.</p>
+            </div>
+        </section>
+
+        <section id="tips">
+            <h2>Preparation Tips</h2>
             <ul>
-                <li><a href="https://www.fire.ca.gov" target="_blank">California Department of Forestry and Fire Protection (CAL FIRE)</a></li>
-                <li><a href="https://www.readyforwildfire.org" target="_blank">Ready For Wildfire</a></li>
-                <li><a href="https://www.redcross.org" target="_blank">American Red Cross</a></li>
-                <li><a href="https://www.fema.gov" target="_blank">FEMA</a></li>
+                <li>Create an emergency kit with essentials like water, food, and first-aid supplies.</li>
+                <li>Have an evacuation plan and practice it with your family.</li>
+                <li>Maintain a defensible space around your property by clearing flammable debris.</li>
+                <li>Keep important documents in a fireproof safe or digitally backed up.</li>
+                <li>Stay informed via official channels and be ready to leave when instructed.</li>
             </ul>
         </section>
 
-        <section id="map" class="section">
-            <h2>California Wildfire Map</h2>
-            <iframe src="https://www.fire.ca.gov/incidents/" width="100%" height="600" style="border:none;"></iframe>
+        <section id="time">
+            <h2>Current Time</h2>
+            <div class="time-container">
+                <div class="time">
+                    <h3>Los Angeles</h3>
+                    <p id="la-time">Loading...</p>
+                </div>
+                <div class="time">
+                    <h3>Chicago</h3>
+                    <p id="chicago-time">Loading...</p>
+                </div>
+                <div class="time">
+                    <h3>New York</h3>
+                    <p id="ny-time">Loading...</p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 California Wildfire Updates. All rights reserved.</p>
-        <p>Contact us at <a href="mailto:info@cawildfires.com">info@cawildfires.com</a></p>
+        <p>&copy; 2025 Safe Weather Solutions. Stay safe and informed.</p>
     </footer>
-
-    <script>
-        function updateTime() {
-            const now = new Date();
-            const options = { hour: '2-digit', minute: '2-digit' };
-
-            const laTime = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'America/Los_Angeles' }).format(now);
-            document.getElementById('time-la').textContent = `Los Angeles: ${laTime}`;
-
-            const nyTime = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'America/New_York' }).format(now);
-            document.getElementById('time-ny').textContent = `New York: ${nyTime}`;
-
-            const chTime = new Intl.DateTimeFormat('en-US', { ...options, timeZone: 'America/Chicago' }).format(now);
-            
+</body>
+</html>
