@@ -3,85 +3,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Track the largest wildfires with real-time updates, FAQs, donation links, and resources to stay informed and safe.">
-    <meta name="keywords" content="wildfire tracker, wildfire updates, donation, safety, largest fires">
-    <meta name="author" content="Moe">
-    <title>Wildfire Tracker</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>Safe Weather Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+        main {
+            padding: 1rem;
+            max-width: 900px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #4CAF50;
+            color: white;
+        }
+        .faq-item {
+            margin: 1rem 0;
+        }
+        .faq-item h3 {
+            cursor: pointer;
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .faq-item p {
+            display: none;
+            padding: 10px;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .clocks {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+        }
+        .email-form {
+            background: #f4f4f4;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: #4CAF50;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Wildfire Tracker</h1>
-        <p>Stay Informed. Stay Safe.</p>
-        <button id="donate-top" onclick="scrollToSection('donate')">Donate Now</button>
+        <h1>Safe Weather Solutions</h1>
+        <p>Your trusted source for weather updates and safety information.</p>
     </header>
     <main>
-        <section id="largest-fires">
-            <h2>Largest Active Fires</h2>
+        <section>
+            <h2>Top 3 Largest Active CA Wildfires</h2>
             <table>
-                <caption>This table provides details on the largest active wildfires, including their containment status, affected acreage, and severity level.</caption>
                 <thead>
                     <tr>
                         <th>Fire Name</th>
-                        <th>Percent Contained</th>
+                        <th>Containment</th>
                         <th>Acres Burned</th>
-                        <th>Severity</th>
-                        <th>More Info</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr class="high-severity">
-                        <td>Example Fire</td>
-                        <td>30%</td>
-                        <td>20,000</td>
-                        <td><i class="fas fa-fire"></i> High</td>
-                        <td><a href="https://example.com">Details</a></td>
-                    </tr>
+                <tbody id="wildfire-table">
+                    <!-- Data will be dynamically added here -->
                 </tbody>
             </table>
         </section>
 
-        <section id="faq">
-            <h2>Frequently Asked Questions</h2>
+        <section>
+            <h2>FAQs</h2>
             <div class="faq-item">
-                <button class="faq-question">How are wildfires tracked?</button>
-                <div class="faq-answer">
-                    <p>Wildfires are tracked using satellite imagery, drones, and on-the-ground reports.</p>
-                </div>
+                <h3>What is Safe Weather Solutions?</h3>
+                <p>We provide weather updates and safety resources to help communities stay informed and prepared.</p>
             </div>
             <div class="faq-item">
-                <button class="faq-question">How can I stay safe during a wildfire?</button>
-                <div class="faq-answer">
-                    <p>Follow evacuation orders, avoid areas with heavy smoke, and have an emergency kit ready. Learn more <a href="https://example.com">here</a>.</p>
-                </div>
-            </div>
-            <input type="text" id="faq-search" placeholder="Search FAQs...">
-        </section>
-
-        <section id="clocks">
-            <h2>Current Time in Major Cities</h2>
-            <div id="time-display">
-                <p>Los Angeles (PST): <span id="la-time"></span></p>
-                <p>Chicago (CST): <span id="chicago-time"></span></p>
-                <p>New York City (EST): <span id="nyc-time"></span></p>
+                <h3>How can I stay updated?</h3>
+                <p>Sign up with your email to receive updates about our future projects and initiatives.</p>
             </div>
         </section>
 
-        <section id="donate">
-            <h2>Support Firefighting Efforts</h2>
-            <p>Your donations help support wildfire victims, firefighting efforts, and preventive measures.</p>
-            <ul>
-                <li><a href="https://example-donation.com">Donate Here</a></li>
-                <li><a href="https://more-info.com">Learn More</a></li>
-            </ul>
+        <section>
+            <h2>Clocks</h2>
+            <div class="clocks">
+                <div><strong>Los Angeles:</strong> <span id="la-time"></span></div>
+                <div><strong>Chicago:</strong> <span id="chi-time"></span></div>
+                <div><strong>New York:</strong> <span id="nyc-time"></span></div>
+            </div>
+        </section>
+
+        <section class="email-form">
+            <h2>Stay Updated</h2>
+            <form action="https://formspree.io/f/{your-formsfree-id}" method="POST">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <button type="submit">Subscribe</button>
+            </form>
         </section>
     </main>
     <footer>
-        <p>&copy; 2025 Wildfire Tracker | <a href="mailto:contact@wildfiretracker.com">Contact Us</a></p>
+        &copy; 2025 Safe Weather Solutions
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+        // Wildfire data
+        const wildfireData = [
+            { name: "Fire A", link: "https://example.com/fire-a", containment: "50%", acres: "12,000" },
+            { name: "Fire B", link: "https://example.com/fire-b", containment: "70%", acres: "20,000" },
+            { name: "Fire C", link: "https://example.com/fire-c", containment: "30%", acres: "8,000" }
+        ];
+
+        // Populate wildfire table
+        const wildfireTable = document.getElementById('wildfire-table');
+        wildfireData.forEach(fire => {
+            const row = `<tr>
+                <td><a href="${fire.link}" target="_blank">${fire.name}</a></td>
+                <td>${fire.containment}</td>
+                <td>${fire.acres}</td>
+            </tr>`;
+            wildfireTable.innerHTML += row;
+        });
+
+        // FAQ toggle
+        document.querySelectorAll('.faq-item h3').forEach(faq => {
+            faq.addEventListener('click', () => {
+                const content = faq.nextElementSibling;
+                content.style.display = content.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Clocks
+        function updateClocks() {
+            const now = new Date();
+            const options = { timeZone: 'America/Los_Angeles', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('la-time').textContent = now.toLocaleTimeString('en-US', options);
+
+            options.timeZone = 'America/Chicago';
+            document.getElementById('chi-time').textContent = now.toLocaleTimeString('en-US', options);
+
+            options.timeZone = 'America/New_York';
+            document.getElementById('nyc-time').textContent = now.toLocaleTimeString('en-US', options);
+        }
+        setInterval(updateClocks, 1000);
+        updateClocks();
+    </script>
 </body>
 </html>
-
