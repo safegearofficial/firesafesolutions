@@ -3,77 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Your trusted source for wildfire updates and preparedness tips.">
-    <title>Safe Weather Solutions</title>
+    <meta name="description" content="Track the largest wildfires with real-time updates, FAQs, donation links, and resources to stay informed and safe.">
+    <meta name="keywords" content="wildfire tracker, wildfire updates, donation, safety, largest fires">
+    <meta name="author" content="Moe">
+    <title>Wildfire Tracker</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Header Section -->
     <header>
-        <h1>Safe Weather Solutions</h1>
-        <p>Your trusted source for wildfire updates and preparedness tips.</p>
+        <h1>Wildfire Tracker</h1>
+        <p>Stay Informed. Stay Safe.</p>
+        <button id="donate-top" onclick="scrollToSection('donate')">Donate Now</button>
     </header>
+    <main>
+        <section id="largest-fires">
+            <h2>Largest Active Fires</h2>
+            <table>
+                <caption>This table provides details on the largest active wildfires, including their containment status, affected acreage, and severity level.</caption>
+                <thead>
+                    <tr>
+                        <th>Fire Name</th>
+                        <th>Percent Contained</th>
+                        <th>Acres Burned</th>
+                        <th>Severity</th>
+                        <th>More Info</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="high-severity">
+                        <td>Example Fire</td>
+                        <td>30%</td>
+                        <td>20,000</td>
+                        <td><i class="fas fa-fire"></i> High</td>
+                        <td><a href="https://example.com">Details</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <a href="#wildfires">Wildfire Updates</a>
-        <a href="#faq">FAQ</a>
-        <a href="#tips">Preparedness Tips</a>
-        <a href="#time">Time Zones</a>
-    </nav>
+        <section id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <button class="faq-question">How are wildfires tracked?</button>
+                <div class="faq-answer">
+                    <p>Wildfires are tracked using satellite imagery, drones, and on-the-ground reports.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How can I stay safe during a wildfire?</button>
+                <div class="faq-answer">
+                    <p>Follow evacuation orders, avoid areas with heavy smoke, and have an emergency kit ready. Learn more <a href="https://example.com">here</a>.</p>
+                </div>
+            </div>
+            <input type="text" id="faq-search" placeholder="Search FAQs...">
+        </section>
 
-    <!-- Wildfire Updates Section -->
-    <section id="wildfires">
-        <h2>Current Active Wildfires in California</h2>
-        <div id="loading" class="loading">Loading wildfire data...</div>
-        <table id="wildfire-table" style="display:none;">
-            <thead>
-                <tr>
-                    <th>Fire Name</th>
-                    <th>County</th>
-                    <th>Acres Burned</th>
-                    <th>Containment</th>
-                    <th>Last Updated</th>
-                </tr>
-            </thead>
-            <tbody id="wildfire-data"></tbody>
-        </table>
-    </section>
+        <section id="clocks">
+            <h2>Current Time in Major Cities</h2>
+            <div id="time-display">
+                <p>Los Angeles (PST): <span id="la-time"></span></p>
+                <p>Chicago (CST): <span id="chicago-time"></span></p>
+                <p>New York City (EST): <span id="nyc-time"></span></p>
+            </div>
+        </section>
 
-    <!-- FAQ Section -->
-    <section id="faq">
-        <h2>Frequently Asked Questions</h2>
-        <h3>What should I do if I receive an evacuation order?</h3>
-        <p>Evacuate immediately and follow the designated routes. Delaying can increase your risk.</p>
-        <h3>How can I protect my home from wildfires?</h3>
-        <p>Maintain defensible space by clearing vegetation, and use fire-resistant building materials.</p>
-    </section>
-
-    <!-- Preparedness Tips Section -->
-    <section id="tips">
-        <h2>Wildfire Preparedness Tips</h2>
-        <ul>
-            <li>Assemble an emergency kit with essentials like food, water, and medications.</li>
-            <li>Sign up for local alert systems to stay informed.</li>
-            <li>Create a wildfire action plan for your family.</li>
-        </ul>
-    </section>
-
-    <!-- Time Zones Section -->
-    <section id="time">
-        <h2>Current Time in Major U.S. Cities</h2>
-        <p><strong>Los Angeles (PST):</strong> <span id="time-la"></span></p>
-        <p><strong>Chicago (CST):</strong> <span id="time-chi"></span></p>
-        <p><strong>New York (EST):</strong> <span id="time-ny"></span></p>
-    </section>
-
-    <!-- Footer -->
+        <section id="donate">
+            <h2>Support Firefighting Efforts</h2>
+            <p>Your donations help support wildfire victims, firefighting efforts, and preventive measures.</p>
+            <ul>
+                <li><a href="https://example-donation.com">Donate Here</a></li>
+                <li><a href="https://more-info.com">Learn More</a></li>
+            </ul>
+        </section>
+    </main>
     <footer>
-        <p>&copy; 2025 Safe Weather Solutions. All rights reserved.</p>
+        <p>&copy; 2025 Wildfire Tracker | <a href="mailto:contact@wildfiretracker.com">Contact Us</a></p>
     </footer>
 
-    <!-- JavaScript -->
-    <script async src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
 
