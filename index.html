@@ -15,48 +15,68 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            background: #f4f4f9;
+            color: #333;
         }
         header {
-            background: #4CAF50;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
             color: white;
             padding: 1rem 0;
             text-align: center;
             position: relative;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin: 0.5rem 0 0;
+            font-size: 1.2rem;
         }
         main {
-            padding: 1rem;
+            padding: 2rem;
             max-width: 900px;
             margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1rem 0;
+            margin: 2rem 0;
         }
         th, td {
             border: 1px solid #ddd;
-            padding: 8px;
+            padding: 12px;
             text-align: left;
         }
         th {
             background: #4CAF50;
             color: white;
+            font-size: 1.1rem;
+        }
+        tr:nth-child(even) {
+            background: #f9f9f9;
         }
         footer {
             text-align: center;
             margin-top: 2rem;
             padding: 1rem;
-            background: #4CAF50;
+            background: linear-gradient(90deg, #4CAF50, #45a049);
             color: white;
         }
         button {
             margin-top: 1rem;
-            padding: 0.5rem 1rem;
+            padding: 0.7rem 1.5rem;
             background: #4CAF50;
             color: white;
             border: none;
+            border-radius: 5px;
             cursor: pointer;
             font-size: 1rem;
+            transition: background 0.3s;
         }
         button:hover {
             background: #45a049;
@@ -75,6 +95,34 @@
             border-radius: 50%;
             font-size: 1.2rem;
             cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Social Media Links */
+        #social-media a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        #social-media a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Styling */
+        form {
+            margin-top: 2rem;
+        }
+        form label {
+            font-size: 1.1rem;
+        }
+        form input {
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            width: calc(100% - 1rem);
+            border: 1px solid #ddd;
+            border-radius: 4px;
         }
     </style>
 </head>
@@ -95,7 +143,23 @@
                         <th>Acres Burned</th>
                     </tr>
                 </thead>
-                <tbody id="wildfire-table"></tbody>
+                <tbody id="wildfire-table">
+                    <tr>
+                        <td>Fire A</td>
+                        <td>50%</td>
+                        <td>12,000</td>
+                    </tr>
+                    <tr>
+                        <td>Fire B</td>
+                        <td>70%</td>
+                        <td>20,000</td>
+                    </tr>
+                    <tr>
+                        <td>Fire C</td>
+                        <td>30%</td>
+                        <td>8,000</td>
+                    </tr>
+                </tbody>
             </table>
         </section>
 
