@@ -286,7 +286,7 @@
         });
 
         function updateTime() {
-            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const options = { hour: '2-digit', minute: '2-digit',};
             document.getElementById('la-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/Los_Angeles' });
             document.getElementById('chi-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/Chicago' });
             document.getElementById('ny-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/New_York' });
