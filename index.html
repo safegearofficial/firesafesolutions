@@ -17,6 +17,11 @@
             line-height: 1.6;
             background: #f4f4f9;
             color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background: #121212;
+            color: #f4f4f4;
         }
         header {
             background: linear-gradient(90deg, #4CAF50, #45a049);
@@ -42,6 +47,9 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+        main.dark-mode {
+            background: #1e1e1e;
+        }
         table {
             width: 100%;
             border-collapse: collapse;
@@ -59,6 +67,9 @@
         }
         tr:nth-child(even) {
             background: #f9f9f9;
+        }
+        tr.dark-mode:nth-child(even) {
+            background: #2a2a2a;
         }
         footer {
             text-align: center;
@@ -124,6 +135,31 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
+        /* FAQ and Tips */
+        .faq {
+            margin: 2rem 0;
+        }
+        .faq h3 {
+            cursor: pointer;
+            background: #f4f4f9;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .faq h3:hover {
+            background: #e9e9ee;
+        }
+        .faq p {
+            display: none;
+            padding: 10px;
+            margin: 0;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
     </style>
 </head>
 <body>
@@ -133,6 +169,12 @@
         <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">Toggle Dark Mode</button>
     </header>
     <main>
+        <!-- Optional Alert Banner -->
+        <div id="alert-banner" style="background: #ffcc00; color: #333; padding: 10px; text-align: center; display: none;">
+            <p style="margin: 0;">⚠️ Wildfire Alert: Stay prepared and follow local evacuation guidelines!</p>
+            <button onclick="this.parentElement.style.display='none'" style="background: none; border: none; font-size: 16px; cursor: pointer;">✖️</button>
+        </div>
+
         <section>
             <h2>Top 3 Largest Active CA Wildfires</h2>
             <table>
@@ -161,6 +203,35 @@
                     </tr>
                 </tbody>
             </table>
+        </section>
+
+        <section>
+            <h2>FAQs and Tips</h2>
+            <div class="faq">
+                <h3>What is Safe Weather Solutions?</h3>
+                <p>We provide weather updates and safety resources to help communities stay informed and prepared.</p>
+                <h3>How can I stay safe during a wildfire?</h3>
+                <p>Have an evacuation plan, keep an emergency kit, and stay updated through official sources like Cal Fire.</p>
+                <h3>What are some must-have items in an emergency kit?</h3>
+                <p>Include water, non-perishable food, a flashlight, batteries, a first-aid kit, and important documents.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Donation Links & More Information</h2>
+            <ul>
+                <li><a href="https://www.redcross.org/donate" target="_blank">Red Cross - Donate to Disaster Relief</a></li>
+                <li><a href="https://www.globalgiving.org/" target="_blank">GlobalGiving - Wildfire Relief Fund</a></li>
+                <li><a href="https://www.ready.gov/" target="_blank">Ready.gov - Wildfire Preparedness Tips</a></li>
+                <li><a href="https://www.fire.ca.gov/" target="_blank">Cal Fire - Incident Information</a></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Current Time</h2>
+            <p>Los Angeles: <span id="la-time"></span></p>
+            <p>Chicago: <span id="chi-time"></span></p>
+            <p>New York: <span id="ny-time"></span></p>
         </section>
 
         <section>
@@ -201,6 +272,40 @@
         backToTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq h3').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            });
+        });
+
+        // Current Time Display
+        function updateTime() {
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            document.getElementById('la-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/Los_Angeles' });
+            document.getElementById('chi-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/Chicago' });
+            document.getElementById('ny-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/New_York' });
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('main').classList.toggle('dark-mode');
+            document.querySelectorAll('tr').forEach(row => row.classList.toggle('dark-mode'));
+        });
+
+        // Show Alert Banner Manually
+        function showAlertBanner() {
+            document.getElementById('alert-banner').style.display = 'block';
+        }
+        // Example: Uncomment the next line to display the alert manually.
+        // showAlertBanner();
     </script>
 </body>
 </html>
+
