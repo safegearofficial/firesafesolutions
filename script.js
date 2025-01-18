@@ -1,65 +1,44 @@
-// API URL for live wildfire data
-const apiUrl = 'https://incidents.fire.ca.gov/umbraco/api/IncidentApi/List?inactive=true';
-const useCorsProxy = true; // Set to true if CORS issues occur
-
-const fetchUrl = useCorsProxy
-    ? `https://cors-anywhere.herokuapp.com/${apiUrl}`
-    : apiUrl;
-
-// Fetch and display wildfire data
-async function fetchWildfireData() {
-    try {
-        const response = await fetch(fetchUrl, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-
-        const tableBody = document.getElementById('wildfire-data');
-        tableBody.innerHTML = ''; // Clear old rows
-
-        if (data && data.length > 0) {
-            data.forEach(fire => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${fire.Name || 'N/A'}</td>
-                    <td>${fire.Counties || 'N/A'}</td>
-                    <td>${fire.AcresBurned || '0'} acres</td>
-                    <td>${fire.PercentContained || '0'}%</td>
-                    <td>${fire.LastUpdated ? new Date(fire.LastUpdated).toLocaleString() : 'N/A'}</td>
-                `;
-                tableBody.appendChild(row);
-            });
-
-            document.getElementById('wildfire-table').style.display = 'table';
-            document.getElementById('loading').style.display = 'none';
-        } else {
-            document.getElementById('loading').textContent = 'No active wildfires found.';
-        }
-    } catch (error) {
-        console.error('Error fetching wildfire data:', error);
-        document.getElementById('loading').textContent = 'Failed to load wildfire data. Please try again later.';
-    }
+// Scroll to Section
+function scrollToSection(sectionId) {
+    document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
 }
 
-// Update time zones
-function updateTime() {
+// FAQ Accordion
+document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+        const answer = button.nextElementSibling;
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+    });
+});
+
+// Clock Updates
+function updateClocks() {
+    const cities = {
+        'la-time': -8, // Los Angeles
+        'chicago-time': -6, // Chicago
+        'nyc-time': -5, // New York City
+    };
+
     const now = new Date();
-    document.getElementById('time-la').textContent = now.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
-    document.getElementById('time-chi').textContent = now.toLocaleString('en-US', { timeZone: 'America/Chicago' });
-    document.getElementById('time-ny').textContent = now.toLocaleString('en-US', { timeZone: 'America/New_York' });
+    Object.keys(cities).forEach(id => {
+        const utcTime = new Date(now.getTime() + now.getTimezoneOffset() * 60000);
+        const cityTime = new Date(utcTime.getTime() + cities[id] * 3600 * 1000);
+        document.getElementById(id).innerText = cityTime.toLocaleTimeString();
+    });
 }
 
-// Initial data load
-fetchWildfireData();
-updateTime();
+setInterval(updateClocks, 1000);
 
-// Set intervals for updates
-setInterval(fetchWildfireData, 600000); // Update wildfire data every 10 minutes
-setInterval(updateTime, 1000); // Update time every second
+// Search FAQs
+document.getElementById('faq-search').addEventListener('input', event => {
+    const query = event.target.value.toLowerCase();
+    document.querySelectorAll('.faq-item').forEach(item => {
+        const question = item.querySelector('.faq-question').innerText.toLowerCase();
+        const answer = item.querySelector('.faq-answer').innerText.toLowerCase();
+        if (question.includes(query) || answer.includes(query)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+});
