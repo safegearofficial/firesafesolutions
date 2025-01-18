@@ -9,7 +9,6 @@
     <title>Safe Weather Solutions | Wildfire Updates</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* General Styles */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -28,7 +27,6 @@
             color: white;
             padding: 1rem 0;
             text-align: center;
-            position: relative;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         header h1 {
@@ -92,8 +90,6 @@
         button:hover {
             background: #45a049;
         }
-
-        /* Back to Top Button */
         #back-to-top {
             position: fixed;
             bottom: 20px;
@@ -108,8 +104,6 @@
             cursor: pointer;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
-
-        /* Social Media Links */
         #social-media a {
             display: inline-block;
             margin: 0 10px;
@@ -120,8 +114,6 @@
         #social-media a:hover {
             text-decoration: underline;
         }
-
-        /* Form Styling */
         form {
             margin-top: 2rem;
         }
@@ -135,8 +127,6 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
-
-        /* FAQ and Tips */
         .faq {
             margin: 2rem 0;
         }
@@ -160,6 +150,27 @@
             border-top: none;
             border-radius: 0 0 5px 5px;
         }
+        .time-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        .time-container.dark-mode {
+            background: #1e1e1e;
+            border-color: #2a2a2a;
+        }
+        #quote {
+            font-style: italic;
+            text-align: center;
+            margin: 20px 0;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
@@ -169,7 +180,6 @@
         <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">Toggle Dark Mode</button>
     </header>
     <main>
-        <!-- Optional Alert Banner -->
         <div id="alert-banner" style="background: #ffcc00; color: #333; padding: 10px; text-align: center; display: none;">
             <p style="margin: 0;">⚠️ Wildfire Alert: Stay prepared and follow local evacuation guidelines!</p>
             <button onclick="this.parentElement.style.display='none'" style="background: none; border: none; font-size: 16px; cursor: pointer;">✖️</button>
@@ -227,33 +237,25 @@
             </ul>
         </section>
 
-        <section>
-            <h2>Current Time</h2>
+        <section class="time-container">
             <p>Los Angeles: <span id="la-time"></span></p>
             <p>Chicago: <span id="chi-time"></span></p>
             <p>New York: <span id="ny-time"></span></p>
         </section>
 
-        <section>
-            <h2>Social Media Links</h2>
-            <div id="social-media">
-                <a href="https://facebook.com" target="_blank">Facebook</a>
-                <a href="https://twitter.com" target="_blank">Twitter</a>
-                <a href="https://instagram.com" target="_blank">Instagram</a>
-            </div>
-        </section>
+        <p id="quote"></p>
 
         <section>
             <h2>Stay Updated</h2>
             <form action="https://formspree.io/f/{your-formsfree-id}" method="POST">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">Subscribe to receive the latest updates on wildfires, safety tips, and community resources.</p>
                 <button type="submit">Subscribe</button>
             </form>
         </section>
     </main>
 
-    <!-- Back-to-Top Button -->
     <button id="back-to-top" title="Back to Top">↑</button>
 
     <footer>
@@ -261,10 +263,8 @@
     </footer>
 
     <script>
-        // Dynamic Footer Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Back-to-Top Button
         const backToTop = document.getElementById('back-to-top');
         window.addEventListener('scroll', () => {
             backToTop.style.display = window.scrollY > 200 ? 'block' : 'none';
@@ -273,7 +273,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // FAQ Toggle
         document.querySelectorAll('.faq h3').forEach(question => {
             question.addEventListener('click', () => {
                 const answer = question.nextElementSibling;
@@ -281,7 +280,6 @@
             });
         });
 
-        // Current Time Display
         function updateTime() {
             const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
             document.getElementById('la-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/Los_Angeles' });
@@ -291,21 +289,14 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Dark Mode Toggle
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        darkModeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            document.querySelector('main').classList.toggle('dark-mode');
-            document.querySelectorAll('tr').forEach(row => row.classList.toggle('dark-mode'));
-        });
-
-        // Show Alert Banner Manually
-        function showAlertBanner() {
-            document.getElementById('alert-banner').style.display = 'block';
-        }
-        // Example: Uncomment the next line to display the alert manually.
-        // showAlertBanner();
+        const quotes = [
+            "Stay prepared, stay safe.",
+            "Your safety is our priority.",
+            "Wildfires are preventable stay aware, stay safe.",
+            "Go beyond the headlines.",
+            "Stay informed, save lives."
+        ];
+        document.getElementById('quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
     </script>
 </body>
 </html>
-
