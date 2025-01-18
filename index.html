@@ -9,6 +9,7 @@
     <title>Safe Weather Solutions | Wildfire Updates</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
@@ -16,27 +17,20 @@
             line-height: 1.6;
             background: #f4f4f9;
             color: #333;
-            transition: background 0.3s, color 0.3s;
         }
-        body.dark-mode {
-            background: #121212;
-            color: #f4f4f4;
-        }
+
         header {
             background: linear-gradient(90deg, #4CAF50, #45a049);
             color: white;
-            padding: 1rem 0;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
         }
+
         header h1 {
             margin: 0;
             font-size: 2.5rem;
         }
-        header p {
-            margin: 0.5rem 0 0;
-            font-size: 1.2rem;
-        }
+
         main {
             padding: 2rem;
             max-width: 900px;
@@ -45,131 +39,71 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        main.dark-mode {
-            background: #1e1e1e;
+
+        ul {
+            list-style-type: none;
+            padding: 0;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+
+        ul li a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* City Times */
+        .time-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
             margin: 2rem 0;
         }
-        th, td {
+
+        .time-card {
+            flex: 1;
+            padding: 1rem;
             border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background: #4CAF50;
-            color: white;
-            font-size: 1.1rem;
-        }
-        tr:nth-child(even) {
+            border-radius: 8px;
+            text-align: center;
             background: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
-        tr.dark-mode:nth-child(even) {
-            background: #2a2a2a;
+
+        .time-card h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.2rem;
+            color: #4CAF50;
         }
+
+        .time-card p {
+            font-size: 1.1rem;
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+
+        .time-card .date {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .time-card img {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+
         footer {
             text-align: center;
             margin-top: 2rem;
             padding: 1rem;
             background: linear-gradient(90deg, #4CAF50, #45a049);
             color: white;
-        }
-        button {
-            margin-top: 1rem;
-            padding: 0.7rem 1.5rem;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: #45a049;
-        }
-        #back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none;
-            padding: 0.5rem;
-            background: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        #social-media a {
-            display: inline-block;
-            margin: 0 10px;
-            color: #4CAF50;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-        #social-media a:hover {
-            text-decoration: underline;
-        }
-        form {
-            margin-top: 2rem;
-        }
-        form label {
-            font-size: 1.1rem;
-        }
-        form input {
-            padding: 0.5rem;
-            margin: 0.5rem 0;
-            width: calc(100% - 1rem);
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .faq {
-            margin: 2rem 0;
-        }
-        .faq h3 {
-            cursor: pointer;
-            background: #f4f4f9;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
-        .faq h3:hover {
-            background: #e9e9ee;
-        }
-        .faq p {
-            display: none;
-            padding: 10px;
-            margin: 0;
-            background: #fff;
-            border: 1px solid #ddd;
-            border-top: none;
-            border-radius: 0 0 5px 5px;
-        }
-        .time-container {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem;
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin: 2rem 0;
-        }
-        .time-container.dark-mode {
-            background: #1e1e1e;
-            border-color: #2a2a2a;
-        }
-        #quote {
-            font-style: italic;
-            text-align: center;
-            margin: 20px 0;
-        }
-        html {
-            scroll-behavior: smooth;
         }
     </style>
 </head>
@@ -215,21 +149,9 @@
         </section>
 
         <section>
-            <h2>FAQs and Tips</h2>
-            <div class="faq">
-                <h3>What is Safe Weather Solutions?</h3>
-                <p>We provide weather updates and safety resources from verified channels to help communities stay accurately informed and prepared.</p>
-                <h3>How can I stay safe during a wildfire?</h3>
-                <p>Have an evacuation plan, keep an emergency kit, and stay updated through official sources like Cal Fire.</p>
-                <h3>What are some must-have items in an emergency kit?</h3>
-                <p>Include water, non-perishable food, a flashlight, batteries, a first-aid kit, and important documents.</p>
-            </div>
-        </section>
-
-        <section>
             <h2>Donation Links & More Information</h2>
             <ul>
-                <li><a href="https://www.redcross.org/donate" target="_blank">Red Cross - Donate to Disaster Relief</a></li>
+                <li><a href="https://www.lafoodbank.org/donate/" target="_blank">LA Food Bank - Donate to End Hunger</a></li>
                 <li><a href="https://www.globalgiving.org/" target="_blank">GlobalGiving - Wildfire Relief Fund</a></li>
                 <li><a href="https://www.ready.gov/" target="_blank">Ready.gov - Wildfire Preparedness Tips</a></li>
                 <li><a href="https://www.fire.ca.gov/" target="_blank">Cal Fire - Incident Information</a></li>
@@ -237,25 +159,36 @@
         </section>
 
         <section class="time-container">
-            <p>Los Angeles: <span id="la-time"></span></p>
-            <p>Chicago: <span id="chi-time"></span></p>
-            <p>New York: <span id="ny-time"></span></p>
+            <div class="time-card">
+                <h3>Los Angeles</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/606/606684.png" alt="Los Angeles Icon">
+                <p id="la-time"></p>
+                <p class="date" id="la-date"></p>
+            </div>
+            <div class="time-card">
+                <h3>Chicago</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/606/606692.png" alt="Chicago Icon">
+                <p id="chi-time"></p>
+                <p class="date" id="chi-date"></p>
+            </div>
+            <div class="time-card">
+                <h3>New York</h3>
+                <img src="https://cdn-icons-png.flaticon.com/512/606/606687.png" alt="New York Icon">
+                <p id="ny-time"></p>
+                <p class="date" id="ny-date"></p>
+            </div>
         </section>
-
-        <p id="quote"></p>
 
         <section>
             <h2>Stay Updated</h2>
             <form action="https://formspree.io/f/xovvbpgy" method="POST">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
-                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">Subscribe to receive the latest updates on speacial weather events, safety tips, community resources and future projects.</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">Subscribe to receive the latest updates on special weather events, safety tips, community resources, and future projects.</p>
                 <button type="submit">Subscribe</button>
             </form>
         </section>
     </main>
-
-    <button id="back-to-top" title="Back to Top">↑</button>
 
     <footer>
         &copy; <span id="year"></span> Safe Weather Solutions
@@ -264,38 +197,22 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        const backToTop = document.getElementById('back-to-top');
-        window.addEventListener('scroll', () => {
-            backToTop.style.display = window.scrollY > 200 ? 'block' : 'none';
-        });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        document.querySelectorAll('.faq h3').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-            });
-        });
-
         function updateTime() {
-            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
-            document.getElementById('la-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/Los_Angeles' });
-            document.getElementById('chi-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/Chicago' });
-            document.getElementById('ny-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/New_York' });
+            const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+            document.getElementById('la-time').textContent = new Date().toLocaleTimeString('en-US', { ...optionsTime, timeZone: 'America/Los_Angeles' });
+            document.getElementById('la-date').textContent = new Date().toLocaleDateString('en-US', { ...optionsDate, timeZone: 'America/Los_Angeles' });
+
+            document.getElementById('chi-time').textContent = new Date().toLocaleTimeString('en-US', { ...optionsTime, timeZone: 'America/Chicago' });
+            document.getElementById('chi-date').textContent = new Date().toLocaleDateString('en-US', { ...optionsDate, timeZone: 'America/Chicago' });
+
+            document.getElementById('ny-time').textContent = new Date().toLocaleTimeString('en-US', { ...optionsTime, timeZone: 'America/New_York' });
+            document.getElementById('ny-date').textContent = new Date().toLocaleDateString('en-US', { ...optionsDate, timeZone: 'America/New_York' });
         }
+
         setInterval(updateTime, 1000);
         updateTime();
-
-        const quotes = [
-            "Stay prepared, stay safe.",
-            "Your safety is our priority.",
-            "Wildfires are preventable stay aware, stay safe.",
-            "Go beyond the headlines.",
-            "Stay informed, save lives."
-        ];
-        document.getElementById('quote').textContent = quotes[Math.floor(Math.random() * quotes.length)];
     </script>
 </body>
 </html>
