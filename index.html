@@ -3,19 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safe Weather Solutions</title>
+    <meta name="description" content="Safe Weather Solutions provides updates on California wildfires, safety tips, and resources to keep you informed and prepared.">
+    <meta name="keywords" content="California wildfires, wildfire updates, safety tips, donations, weather solutions">
+    <meta name="author" content="Safe Weather Solutions">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https:; script-src 'self' https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.4.0/purify.min.js; style-src 'self'; font-src 'self';">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Cache-Control" content="no-store">
+    <title>Safe Weather Solutions | Wildfire Updates</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
         }
         header {
             background: #4CAF50;
             color: white;
             padding: 1rem 0;
             text-align: center;
+            position: relative;
         }
         main {
             padding: 1rem;
@@ -36,33 +47,6 @@
             background: #4CAF50;
             color: white;
         }
-        .faq-item {
-            margin: 1rem 0;
-        }
-        .faq-item h3 {
-            cursor: pointer;
-            background: #f4f4f4;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-        .faq-item p {
-            display: none;
-            padding: 10px;
-            background: #f9f9f9;
-            border: 1px solid #ddd;
-        }
-        .clocks {
-            display: flex;
-            justify-content: space-between;
-            margin: 1rem 0;
-        }
-        .email-form {
-            background: #f4f4f4;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            margin-top: 2rem;
-            text-align: center;
-        }
         footer {
             text-align: center;
             margin-top: 2rem;
@@ -70,14 +54,88 @@
             background: #4CAF50;
             color: white;
         }
+        button {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        button:hover {
+            background: #45a049;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            padding: 0.5rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Countdown Timer */
+        #countdown {
+            display: none; /* Initially hidden */
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #ffefc4;
+            border: 1px solid #ffd700;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+
+        /* Social Media */
+        #social-media a {
+            margin: 0 10px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        #social-media a:hover {
+            text-decoration: underline;
+        }
+
+        /* Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: #4CAF50;
+            width: 0%;
+        }
+
+        /* Image Slideshow */
+        #slideshow img {
+            width: 100%;
+            display: none;
+        }
+        #slideshow img:first-child {
+            display: block;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Safe Weather Solutions</h1>
         <p>Your trusted source for weather updates and safety information.</p>
+        <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">Toggle Dark Mode</button>
     </header>
     <main>
+        <!-- Progress Bar -->
+        <div id="progress-bar"></div>
+
+        <!-- Countdown Timer -->
+        <div id="countdown"></div>
+
         <section>
             <h2>Top 3 Largest Active CA Wildfires</h2>
             <table>
@@ -88,34 +146,27 @@
                         <th>Acres Burned</th>
                     </tr>
                 </thead>
-                <tbody id="wildfire-table">
-                    <!-- Data will be dynamically added here -->
-                </tbody>
+                <tbody id="wildfire-table"></tbody>
             </table>
         </section>
 
+        <section id="slideshow">
+            <h2>Image Slideshow</h2>
+            <img src="https://via.placeholder.com/900x300?text=Wildfire+1" alt="Wildfire Image 1">
+            <img src="https://via.placeholder.com/900x300?text=Wildfire+2" alt="Wildfire Image 2">
+            <img src="https://via.placeholder.com/900x300?text=Wildfire+3" alt="Wildfire Image 3">
+        </section>
+
         <section>
-            <h2>FAQs</h2>
-            <div class="faq-item">
-                <h3>What is Safe Weather Solutions?</h3>
-                <p>We provide weather updates and safety resources to help communities stay informed and prepared.</p>
-            </div>
-            <div class="faq-item">
-                <h3>How can I stay updated?</h3>
-                <p>Sign up with your email to receive updates about our future projects and initiatives.</p>
+            <h2>Social Media Links</h2>
+            <div id="social-media">
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
             </div>
         </section>
 
         <section>
-            <h2>Clocks</h2>
-            <div class="clocks">
-                <div><strong>Los Angeles:</strong> <span id="la-time"></span></div>
-                <div><strong>Chicago:</strong> <span id="chi-time"></span></div>
-                <div><strong>New York:</strong> <span id="nyc-time"></span></div>
-            </div>
-        </section>
-
-        <section class="email-form">
             <h2>Stay Updated</h2>
             <form action="https://formspree.io/f/{your-formsfree-id}" method="POST">
                 <label for="email">Email:</label>
@@ -124,51 +175,55 @@
             </form>
         </section>
     </main>
+
+    <!-- Back-to-Top Button -->
+    <button id="back-to-top" title="Back to Top">↑</button>
+
     <footer>
-        &copy; 2025 Safe Weather Solutions
+        &copy; <span id="year"></span> Safe Weather Solutions
     </footer>
 
     <script>
-        // Wildfire data
-        const wildfireData = [
-            { name: "Fire A", link: "https://example.com/fire-a", containment: "50%", acres: "12,000" },
-            { name: "Fire B", link: "https://example.com/fire-b", containment: "70%", acres: "20,000" },
-            { name: "Fire C", link: "https://example.com/fire-c", containment: "30%", acres: "8,000" }
-        ];
+        // Dynamic Footer Year
+        document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Populate wildfire table
-        const wildfireTable = document.getElementById('wildfire-table');
-        wildfireData.forEach(fire => {
-            const row = `<tr>
-                <td><a href="${fire.link}" target="_blank">${fire.name}</a></td>
-                <td>${fire.containment}</td>
-                <td>${fire.acres}</td>
-            </tr>`;
-            wildfireTable.innerHTML += row;
+        // Back-to-Top Button
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            backToTop.style.display = window.scrollY > 200 ? 'block' : 'none';
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // FAQ toggle
-        document.querySelectorAll('.faq-item h3').forEach(faq => {
-            faq.addEventListener('click', () => {
-                const content = faq.nextElementSibling;
-                content.style.display = content.style.display === 'block' ? 'none' : 'block';
-            });
-        });
-
-        // Clocks
-        function updateClocks() {
-            const now = new Date();
-            const options = { timeZone: 'America/Los_Angeles', hour: '2-digit', minute: '2-digit' };
-            document.getElementById('la-time').textContent = now.toLocaleTimeString('en-US', options);
-
-            options.timeZone = 'America/Chicago';
-            document.getElementById('chi-time').textContent = now.toLocaleTimeString('en-US', options);
-
-            options.timeZone = 'America/New_York';
-            document.getElementById('nyc-time').textContent = now.toLocaleTimeString('en-US', options);
+        // Countdown Timer (Optional, Toggle On/Off)
+        const countdownElement = document.getElementById('countdown');
+        const countdownToggle = true; // Set to false to hide countdown
+        if (countdownToggle) {
+            countdownElement.style.display = 'block';
+            const targetDate = new Date('2025-12-31').getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                countdownElement.textContent = `Days until event: ${days}`;
+            }, 1000);
         }
-        setInterval(updateClocks, 1000);
-        updateClocks();
+
+        // Image Slideshow
+        const slides = document.querySelectorAll('#slideshow img');
+        let currentSlide = 0;
+        setInterval(() => {
+            slides[currentSlide].style.display = 'none';
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].style.display = 'block';
+        }, 3000);
+
+        // Progress Bar
+        window.addEventListener('scroll', () => {
+            const scrollProgress = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            document.getElementById('progress-bar').style.width = `${scrollProgress}%`;
+        });
     </script>
 </body>
 </html>
