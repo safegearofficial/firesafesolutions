@@ -16,6 +16,7 @@
     <meta name="author" content="Safe Weather Solutions">
     <title>Safe Weather Solutions | Wildfire Updates</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -238,10 +239,39 @@
         body.dark-mode #dark-mode-toggle {
             color: #e0e0e0;
         }
+        #lang-select {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.3rem;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.9);
+        }
+        body.dark-mode #lang-select {
+            background: #2a2a2a;
+            color: #e0e0e0;
+        }
+        #map {
+            height: 400px;
+            margin: 2rem 0;
+            border-radius: 8px;
+            z-index: 1;
+        }
+        @media (pointer: coarse) {
+            button, .faq-question {
+                min-width: 48px;
+                min-height: 48px;
+            }
+            #map { height: 300px; }
+        }
     </style>
 </head>
 <body>
     <header>
+        <select id="lang-select">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+        </select>
         <h1>Safe Weather Solutions</h1>
         <p>Your trusted source for weather updates and safety information.</p>
         <button id="dark-mode-toggle" title="Toggle Dark Mode">🌓</button>
@@ -283,6 +313,11 @@
         </section>
 
         <section>
+            <h2>Live Fire Map</h2>
+            <div id="map"></div>
+        </section>
+
+        <section>
             <h2>FAQs and Tips</h2>
             <div class="faq">
                 <button class="faq-question" aria-expanded="false">What is Safe Weather Solutions?</button>
@@ -293,6 +328,7 @@
                 <p class="faq-answer">For emergency kit essentials one should include water, non-perishable food, a flashlight, batteries, a first-aid kit, and important documents.</p>
             </div>
         </section>
+
         <section>
             <h2>Donation Links & More Information</h2>
             <ul>
@@ -328,8 +364,9 @@
         &copy; <span id="year"></span> Safe Weather Solutions
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-        // Enhanced dark mode toggle
+        // Dark Mode Toggle
         const darkModeToggle = document.getElementById('dark-mode-toggle');
         darkModeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
@@ -337,21 +374,40 @@
             document.querySelector('header').classList.toggle('dark-mode');
             document.querySelector('footer').classList.toggle('dark-mode');
             document.getElementById('back-to-top').classList.toggle('dark-mode');
-            
-            // Toggle moon/sun icon
             darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '🌕' : '🌓';
         });
 
-        // FAQ functionality
-        document.querySelectorAll('.faq-question').forEach(button => {
-            button.addEventListener('click', () => {
-                const expanded = button.getAttribute('aria-expanded') === 'true';
-                button.setAttribute('aria-expanded', !expanded);
-                button.nextElementSibling.style.display = expanded ? 'none' : 'block';
-            });
+        // Language Support
+        const translations = {
+            en: {
+                title: "Safe Weather Solutions",
+                subtitle: "Your trusted source for weather updates and safety information.",
+                mapTitle: "Live Fire Map",
+                // Add more translations as needed
+            },
+            es: {
+                title: "Soluciones Climáticas Seguras",
+                subtitle: "Tu fuente confiable de información meteorológica y de seguridad.",
+                mapTitle: "Mapa de Incendios en Vivo",
+                // Add more translations as needed
+            }
+        };
+
+        document.getElementById('lang-select').addEventListener('change', (e) => {
+            const lang = e.target.value;
+            document.documentElement.lang = lang;
+            document.querySelector('h1').textContent = translations[lang].title;
+            document.querySelector('header p').textContent = translations[lang].subtitle;
+            document.querySelector('#map + h2').textContent = translations[lang].mapTitle;
         });
 
-        // Back to top button
+        // Map Initialization
+        const map = L.map('map').setView([36.7783, -119.4179], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Back to Top
         const backToTop = document.getElementById('back-to-top');
         window.addEventListener('scroll', () => {
             backToTop.style.display = window.scrollY > 200 ? 'block' : 'none';
@@ -360,10 +416,19 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        // Dynamic year
+        // FAQ Functionality
+        document.querySelectorAll('.faq-question').forEach(button => {
+            button.addEventListener('click', () => {
+                const expanded = button.getAttribute('aria-expanded') === 'true';
+                button.setAttribute('aria-expanded', !expanded);
+                button.nextElementSibling.style.display = expanded ? 'none' : 'block';
+            });
+        });
+
+        // Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Time updates
+        // Time Updates
         function updateTime() {
             const options = { hour: '2-digit', minute: '2-digit'};
             document.getElementById('la-time').textContent = new Date().toLocaleTimeString('en-US', { ...options, timeZone: 'America/Los_Angeles' });
@@ -373,7 +438,7 @@
         setInterval(updateTime, 1000);
         updateTime();
 
-        // Random quotes
+        // Random Quotes
         const quotes = [
             "Stay prepared, check updates hourly during fire season",
             "Your evacuation plan matters - practice it today",
