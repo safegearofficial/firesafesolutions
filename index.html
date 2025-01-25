@@ -28,7 +28,7 @@
         }
         body.dark-mode {
             background: #121212;
-            color: #f4f4f4;
+            color: #e0e0e0;
         }
         header {
             background: linear-gradient(90deg, #4CAF50, #45a049);
@@ -37,6 +37,9 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
+        }
+        header.dark-mode {
+            background: linear-gradient(90deg, #2d5f2f, #1e3e20);
         }
         header h1 {
             margin: 0;
@@ -56,6 +59,8 @@
         }
         main.dark-mode {
             background: #1e1e1e;
+            color: #e0e0e0;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
         }
         table {
             width: 100%;
@@ -72,11 +77,22 @@
             color: white;
             font-size: 1.1rem;
         }
+        body.dark-mode th {
+            background: #2d5f2f;
+            border-color: #3d3d3d;
+        }
         tr:nth-child(even) {
             background: #f9f9f9;
         }
-        tr.dark-mode:nth-child(even) {
+        body.dark-mode tr:nth-child(even) {
             background: #2a2a2a;
+        }
+        td {
+            border-color: #ddd;
+        }
+        body.dark-mode td {
+            border-color: #3d3d3d;
+            color: #e0e0e0;
         }
         footer {
             text-align: center;
@@ -84,6 +100,9 @@
             padding: 1rem;
             background: linear-gradient(90deg, #4CAF50, #45a049);
             color: white;
+        }
+        footer.dark-mode {
+            background: linear-gradient(90deg, #2d5f2f, #1e3e20);
         }
         button {
             margin-top: 1rem;
@@ -116,29 +135,7 @@
         #back-to-top.dark-mode {
             background: #45a049;
             color: #121212;
-        }
-        #social-media a {
-            display: inline-block;
-            margin: 0 10px;
-            color: #4CAF50;
-            text-decoration: none;
-            font-size: 1.2rem;
-        }
-        #social-media a:hover {
-            text-decoration: underline;
-        }
-        form {
-            margin-top: 2rem;
-        }
-        form label {
-            font-size: 1.1rem;
-        }
-        form input {
-            padding: 0.5rem;
-            margin: 0.5rem 0;
-            width: calc(100% - 1rem);
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
         }
         .faq {
             margin: 2rem 0;
@@ -153,10 +150,18 @@
             width: 100%;
             text-align: left;
             font-size: 1.1rem;
-            font-weight: normal;
+            color: #333;
+        }
+        body.dark-mode .faq-question {
+            background: #2a2a2a;
+            border-color: #3d3d3d;
+            color: #e0e0e0;
         }
         .faq-question:hover {
             background: #e9e9ee;
+        }
+        body.dark-mode .faq-question:hover {
+            background: #363636;
         }
         .faq-answer {
             display: none;
@@ -166,6 +171,12 @@
             border: 1px solid #ddd;
             border-top: none;
             border-radius: 0 0 5px 5px;
+            color: #333;
+        }
+        body.dark-mode .faq-answer {
+            background: #2a2a2a;
+            border-color: #3d3d3d;
+            color: #e0e0e0;
         }
         .time-container {
             display: flex;
@@ -175,18 +186,44 @@
             border: 1px solid #ddd;
             border-radius: 8px;
             margin: 2rem 0;
+            color: #333;
         }
-        .time-container.dark-mode {
-            background: #1e1e1e;
-            border-color: #2a2a2a;
+        body.dark-mode .time-container {
+            background: #2a2a2a;
+            border-color: #3d3d3d;
+            color: #e0e0e0;
         }
         #quote {
             font-style: italic;
             text-align: center;
             margin: 20px 0;
+            color: #666;
         }
-        html {
-            scroll-behavior: smooth;
+        body.dark-mode #quote {
+            color: #a0a0a0;
+        }
+        a {
+            color: #4CAF50;
+        }
+        body.dark-mode a {
+            color: #66bb6a;
+        }
+        form input {
+            background: white;
+            color: #333;
+        }
+        body.dark-mode form input {
+            background: #2a2a2a;
+            color: #e0e0e0;
+            border-color: #3d3d3d;
+        }
+        #alert-banner {
+            background: #ffcc00;
+            color: #333;
+        }
+        body.dark-mode #alert-banner {
+            background: #ffd700;
+            color: #121212;
         }
         #dark-mode-toggle {
             position: absolute;
@@ -198,6 +235,9 @@
             cursor: pointer;
             color: white;
         }
+        body.dark-mode #dark-mode-toggle {
+            color: #e0e0e0;
+        }
     </style>
 </head>
 <body>
@@ -207,7 +247,7 @@
         <button id="dark-mode-toggle" title="Toggle Dark Mode">🌓</button>
     </header>
     <main>
-        <div id="alert-banner" style="background: #ffcc00; color: #333; padding: 10px; text-align: center; display: none;">
+        <div id="alert-banner" style="padding: 10px; text-align: center; display: none;">
             <p style="margin: 0;">⚠️ Wildfire Alert: Stay prepared and follow any local evacuation guidelines!</p>
             <button onclick="this.parentElement.style.display='none'" style="background: none; border: none; font-size: 16px; cursor: pointer;">✖️</button>
         </div>
@@ -289,11 +329,17 @@
     </footer>
 
     <script>
-        // Initialize dark mode toggle
-        document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+        // Enhanced dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
             document.querySelector('main').classList.toggle('dark-mode');
+            document.querySelector('header').classList.toggle('dark-mode');
+            document.querySelector('footer').classList.toggle('dark-mode');
             document.getElementById('back-to-top').classList.toggle('dark-mode');
+            
+            // Toggle moon/sun icon
+            darkModeToggle.textContent = document.body.classList.contains('dark-mode') ? '🌕' : '🌓';
         });
 
         // FAQ functionality
