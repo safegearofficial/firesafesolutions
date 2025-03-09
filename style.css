@@ -1,5 +1,8 @@
+/* Importing Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -8,7 +11,7 @@ body {
 }
 
 header {
-    background: #0073e6;
+    background: linear-gradient(to right, #0073e6, #00c6ff);
     color: white;
     padding: 50px 20px;
 }
@@ -25,16 +28,23 @@ header h1 {
     color: #0073e6;
     text-decoration: none;
     border-radius: 5px;
+    transition: background 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background: #0073e6;
+    color: white;
 }
 
 section {
-    padding: 40px 20px;
+    padding: 60px 20px;
+    margin: 20px 0;
 }
 
 footer {
     background: #333;
     color: white;
-    padding: 10px;
+    padding: 20px;
     position: fixed;
     width: 100%;
     bottom: 0;
